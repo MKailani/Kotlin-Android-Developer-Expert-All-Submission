@@ -7,8 +7,12 @@ import com.one.submission.dicoding.myfootballapp.view.activity.iview.DetailView
 import kotlinx.android.synthetic.main.activity_detail.*
 
 /**
- * Created by kheys on 30/01/19.
+ * Dicoding Academy
  *
+ * Submission 1
+ * Kotlin Android Developer Expert (MADE)
+ *
+ * Created by kheys on 30/01/19.
  */
 class DetailActivity : BaseActivity(), DetailView {
 

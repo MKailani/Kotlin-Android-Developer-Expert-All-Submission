@@ -14,21 +14,26 @@ import org.jetbrains.anko.AnkoContext
 
 
 /**
- * Created by kheys on 29/01/19.
+ * Dicoding Academy
  *
+ * Submission 1
+ * Kotlin Android Developer Expert (MADE)
+ *
+ * Created by kheys on 30/01/19.
  */
-class FootballAdapter(val mPresenter:MainPresenter) : RecyclerView.Adapter<FootballAdapter.ViewHolder>() {
+class FootballAdapter(val mPresenter: MainPresenter) : RecyclerView.Adapter<FootballAdapter.ViewHolder>() {
 
-    var mDataset : MutableList<Football> = ArrayList()
+     var mDataset: MutableList<Football> = ArrayList()
 
-    fun addList(mDataset : MutableList<Football>){
+    fun addList(mDataset: MutableList<Football>) {
         this.mDataset.addAll(mDataset)
         this.notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            ItemFootballUI().createView(AnkoContext.create(parent.context)),mPresenter)
+            ItemFootballUI().createView(AnkoContext.create(parent.context)), mPresenter
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -38,22 +43,22 @@ class FootballAdapter(val mPresenter:MainPresenter) : RecyclerView.Adapter<Footb
     override fun getItemCount(): Int = mDataset.size
 
 
-    class ViewHolder(itemView: View?, val mPresenter:MainPresenter) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View?, val mPresenter: MainPresenter) : RecyclerView.ViewHolder(itemView) {
         val ivFootbal: ImageView = itemView?.findViewById(R.id.iv_icon) as ImageView
         val tvTitle: TextView = itemView?.findViewById(R.id.tv_title) as TextView
 
-        fun bind(data: Football){
-
+        fun bind(data: Football) {
             // Load Image
-            Utils.loadImage(ivFootbal,data.imagePath)
+            Utils.loadImage(ivFootbal, data.imagePath)
             // Load Title
             tvTitle.text = data.title
 
+            // Click Layout
             itemView.setOnClickListener {
-                mPresenter.doNextActivity(data)
+                mPresenter.doNextActivity(mDataset[adapterPosition])
             }
-
         }
     }
+
 
 }

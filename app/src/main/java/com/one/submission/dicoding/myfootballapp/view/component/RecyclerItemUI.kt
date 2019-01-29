@@ -8,8 +8,12 @@ import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 
 /**
- * Created by kheys on 29/01/19.
+ * Dicoding Academy
  *
+ * Submission 1
+ * Kotlin Android Developer Expert (MADE)
+ *
+ * Created by kheys on 30/01/19.
  */
 class RecyclerItemUI<T : RecyclerView.ViewHolder?>(val mAdapter : RecyclerView.Adapter<T>)
     : AnkoComponent<Activity> {

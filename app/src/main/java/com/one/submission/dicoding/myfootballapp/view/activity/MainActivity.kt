@@ -1,6 +1,5 @@
 package com.one.submission.dicoding.myfootballapp.view.activity
 
-import android.content.Intent
 import android.os.Bundle
 import com.one.submission.dicoding.myfootballapp.R
 import com.one.submission.dicoding.myfootballapp.model.Football
@@ -8,9 +7,18 @@ import com.one.submission.dicoding.myfootballapp.presenter.MainPresenter
 import com.one.submission.dicoding.myfootballapp.view.activity.iview.MainView
 import com.one.submission.dicoding.myfootballapp.view.adapter.FootballAdapter
 import com.one.submission.dicoding.myfootballapp.view.component.RecyclerItemUI
+import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.setContentView
 
-class MainActivity : BaseActivity(),MainView {
+/**
+ * Dicoding Academy
+ *
+ * Submission 1
+ * Kotlin Android Developer Expert (MADE)
+ *
+ * Created by kheys on 30/01/19.
+ */
+class MainActivity : BaseActivity(), MainView {
 
     var listFootbal:MutableList<Football> = ArrayList()
     lateinit var presenter:MainPresenter
@@ -50,8 +58,13 @@ class MainActivity : BaseActivity(),MainView {
         RecyclerItemUI(adapter).setContentView(this)
     }
 
-    override fun goToNextActivity(intent: Intent) {
-        startActivity(intent)
+    // Anko Common
+    override fun goToNextActivity(data: Football) {
+        startActivity(intentFor<DetailActivity>(
+            DetailActivity.EXTRA_IMAGE_PATH to data.imagePath,
+            DetailActivity.EXTRA_TITLE to data.title,
+            DetailActivity.EXTRA_DESC to data.desc
+        ))
     }
 
 }

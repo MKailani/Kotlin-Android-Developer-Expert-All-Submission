@@ -7,8 +7,12 @@ import com.one.submission.dicoding.myfootballapp.R
 import org.jetbrains.anko.*
 
 /**
- * Created by kheys on 30/01/19.
+ * Dicoding Academy
  *
+ * Submission 1
+ * Kotlin Android Developer Expert (MADE)
+ *
+ * Created by kheys on 30/01/19.
  */
 class ItemFootballUI : AnkoComponent<Context> {
     override fun createView(ui: AnkoContext<Context>) : View = with(ui) {

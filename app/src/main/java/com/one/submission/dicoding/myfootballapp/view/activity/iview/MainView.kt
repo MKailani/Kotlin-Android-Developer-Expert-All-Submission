@@ -1,13 +1,17 @@
 package com.one.submission.dicoding.myfootballapp.view.activity.iview
 
-import android.content.Intent
+import com.one.submission.dicoding.myfootballapp.model.Football
 
 /**
- * Created by kheys on 30/01/19.
+ * Dicoding Academy
  *
+ * Submission 1
+ * Kotlin Android Developer Expert (MADE)
+ *
+ * Created by kheys on 30/01/19.
  */
 interface MainView {
     fun prepareData()
     fun loadView()
-    fun goToNextActivity(intent: Intent)
+    fun goToNextActivity(data: Football)
 }
