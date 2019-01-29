@@ -1,0 +1,72 @@
+<resources>
+    <string name="app_name">MyFootballApp</string>
+
+    <!-- String array -->
+    <string-array name="club_description">
+        <item>@string/barcelona_desc</item>
+        <item>@string/real_madrid_desc</item>
+        <item>@string/bayermuncen_desc</item>
+        <item>@string/manchester_city_desc</item>
+        <item>@string/manchester_united_desc</item>
+        <item>@string/chelsea_desc</item>
+        <item>@string/ac_milan_desc</item>
+        <item>@string/arsenal_desc</item>
+    </string-array>
+
+    <string-array name="club_name">
+        <item>Barcelona FC</item>
+        <item>Real Madrid FC</item>
+        <item>Bayern Munchen FC</item>
+        <item>Manchester City FC</item>
+        <item>Manchester United FC</item>
+        <item>Chelsea FC</item>
+        <item>AC Milan FC</item>
+        <item>Arsenal FC</item>
+    </string-array>
+
+    <array name="club_image">
+        <item>@drawable/img_barca</item>
+        <item>@drawable/img_madrid</item>
+        <item>@drawable/img_bayern</item>
+        <item>@drawable/img_city</item>
+        <item>@drawable/img_mu</item>
+        <item>@drawable/img_chelsea</item>
+        <item>@drawable/img_acm</item>
+        <item>@drawable/img_arsenal</item>
+    </array>
+
+    <!-- Description-->
+    <string name="real_madrid_desc" formatted="false">
+        The Real Madrid team of 1902, the year of its foundation.
+        Real Madrid C.F. are a professional football club based in Madrid, Spain. In addition to their domestic success, Real Madrid\'s reputation as a major club was established by their outstanding record in the European Cup. To date, they have been crowned champions of Europe a record thirteen times. Alfredo Di Stéfano, Ferenc Puskás and other famous players helped the club win the European Cup five times in a row between 1956 and 1960, which included the memorable 7–3 Hampden Park final against German side Eintracht Frankfurt in 1960
+    </string>
+
+    <string name="barcelona_desc" formatted="false">
+        The first human settlements in Barcelona date back to Neolithic times. The city itself was founded by the Romans who set up a colony called Barcino at the end of the 1st century BC. The colony had some thousand inhabitants and was bounded by a defensive wall, the remains of which can still be seen in the old town
+    </string>
+
+    <string name="bayermuncen_desc" formatted="false">
+        BayernMunichcrestFullname Fußball-ClubBayernMünchene.V.Nickname(s) DerFCB(TheFCB)DieBayern(TheBavarians) SterndesSüdens(StaroftheSouth) DieRoten(TheReds)[1] FCHollywood[2] Shortname Bayern Founded 27February1900;118yearsago Ground AllianzArena Capacity 75,000[3] President UliHoeneß Chairman Karl-HeinzRummenigge Manager NikoKovač League Bundesliga 2017–18 1st Website Clubwebsite Homecolours Awaycolours Thirdcolours.
+    </string>
+
+    <string name="manchester_city_desc" formatted="false">
+        Manchester City Football Club, sometimes abbreviated to Man City, is a football club based in Manchester, England, that competes in the Premier League
+    </string>
+
+    <string name="manchester_united_desc" formatted="false">
+        Manchester United Football Club, commonly known as Man United,[3][4] or simply United, is a professional football club based in Old Trafford, Greater Manchester, England, that competes in the Premier League
+    </string>
+
+    <string name="chelsea_desc" formatted="false">
+        Chelsea Football Club is a professional football club based in London, England, that competes in the Premier League, the highest tier of English football. The club has won eight League titles, eight FA Cups, five League Cups, four FA Community Shields, one UEFA Europa League, one UEFA Super Cup, one UEFA Cup Winners\' Cup, and one UEFA Champions League.[4][5][6]
+    </string>
+
+    <string name="ac_milan_desc" formatted="false">
+        Milan A.C. Milan badge Full name Associazione Calcio Milan S.p.A.[1]  Nickname(s) I Rossoneri (The Red and Blacks)  Il Diavolo (The Devil)  Casciavìt (Lombard: Screwdrivers) Short name ACM Founded 13 December 1899; 119 years ago Ground San Siro Capacity 80,018 Owner Elliot Advisors (UK) Ltd. (99.93%)[2][3]  Small shareholders (0.07%)[4] Chairman Paolo Scaroni
+    </string>
+
+    <string name="arsenal_desc" formatted="false">
+        Arsenal FC Arsenal Football Club is a professional football club based in Islington, London, England, that plays in the Premier League, the top flight of English football. It has won 13 League titles, a record 13 FA Cups, two League Cups, the League Centenary Trophy, 15 FA Community Shields, one UEFA Cup Winners\' Cup and one Inter-Cities Fairs Cup.
+    </string>
+
+</resources>
