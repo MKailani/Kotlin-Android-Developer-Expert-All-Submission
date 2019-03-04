@@ -2,68 +2,44 @@ package com.one.submission.dicoding.myfootballapp.view.activity
 
 import android.os.Bundle
 import com.one.submission.dicoding.myfootballapp.R
-import com.one.submission.dicoding.myfootballapp.model.Football
-import com.one.submission.dicoding.myfootballapp.presenter.MainPresenter
+import com.one.submission.dicoding.myfootballapp.model.Event
 import com.one.submission.dicoding.myfootballapp.view.activity.iview.MainView
-import com.one.submission.dicoding.myfootballapp.view.adapter.FootballAdapter
-import com.one.submission.dicoding.myfootballapp.view.component.RecyclerItemUI
+import com.one.submission.dicoding.myfootballapp.view.fragment.MatchFragment
+import kotlinx.android.synthetic.main.top_toolbar_with_content.*
 import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.setContentView
 
 /**
  * Dicoding Academy
  *
- * Submission 1
- * Kotlin Android Developer Expert (MADE)
+ * Submission 2
+ * Kotlin Android Developer Expert (KADE)
  *
- * Created by kheys on 30/01/19.
+ * Created by kheys on 04/02/19.
  */
 class MainActivity : BaseActivity(), MainView {
 
-    private var listFootbal:MutableList<Football> = ArrayList()
-    private lateinit var presenter:MainPresenter
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        presenter = MainPresenter(this)
+        setContentView(R.layout.activity_main)
 
         // Initialize
-        prepareData()
+        setupToolbar()
         loadView()
     }
 
-    override fun prepareData() {
-        val desc = resources.getStringArray(R.array.club_description)
-        val name = resources.getStringArray(R.array.club_name)
-        val image = resources.obtainTypedArray(R.array.club_image)
-
-        if(listFootbal.size > 0)
-            listFootbal.clear()
-
-        for (i in name.indices) {
-            listFootbal.add(
-                    Football(image.getResourceId(i, 0),
-                    name[i],
-                    desc[i])
-            )
-        }
-
-        image.recycle()
+    override fun loadView() {
+        replaceFragment(MatchFragment())
     }
 
-    override fun loadView() {
-        val adapter = FootballAdapter(presenter)
-        adapter.addList(listFootbal)
-        RecyclerItemUI(adapter).setContentView(this)
+    override fun setupToolbar() {
+        setSupportActionBar(toolbar)
+        supportActionBar?.title = getString(R.string.main_title_toolbar)
     }
 
     // Anko Common
-    override fun goToNextActivity(data: Football) {
+    override fun goToNextActivity(data: Event) {
         startActivity(intentFor<DetailActivity>(
-            DetailActivity.EXTRA_IMAGE_PATH to data.imagePath,
-            DetailActivity.EXTRA_TITLE to data.title,
-            DetailActivity.EXTRA_DESC to data.desc
+            DetailActivity.EXTRA_EVENT to data
         ))
     }
 

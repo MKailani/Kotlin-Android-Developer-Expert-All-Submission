@@ -1,32 +1,476 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/margin_10dp"
-        android:gravity="center">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <ImageView
-            android:id="@+id/iv_icon"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            tools:src="@drawable/img_barca"
-            android:contentDescription="@null"/>
+    <include
+            layout="@layout/top_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
-    <TextView
-            android:id="@+id/tv_title"
+    <ProgressBar
+            android:id="@+id/pbLoading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_10dp"
-            tools:text="Title"/>
+            android:indeterminate="true"
+            android:layout_gravity="center"
+            android:visibility="gone"/>
 
-    <TextView
-            android:id="@+id/tv_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_10dp"
-            tools:text="description"/>
+    <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+        <!-- Global Wrapper-->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                tools:ignore="UseCompoundDrawables">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_10dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    tools:text="Sat, 22 Sep 2018"/>
+
+            <!-- Team Wrapper-->
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:weightSum="1"
+                    android:layout_marginTop="@dimen/margin_10dp"
+                    android:baselineAligned="false"
+                    android:padding="@dimen/margin_10dp">
+
+                <!-- Team Home -->
+                <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_weight="0.35">
+
+                    <ImageView
+                            android:id="@+id/iv_team_home"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            tools:src="@drawable/img_barca"
+                            android:contentDescription="@null"/>
+
+                    <TextView
+                            android:id="@+id/tv_team_home"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_10dp"
+                            android:textSize="@dimen/text_dimens_14sp"
+                            android:textColor="@color/colorPrimary"
+                            android:textStyle="bold"
+                            tools:text="Title"/>
+
+                </LinearLayout>
+
+                <!-- Scoring-->
+                <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center"
+                        android:layout_weight="0.3"
+                        android:weightSum="1">
+
+                    <TextView
+                            android:id="@+id/tv_score_home"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/text_dimens_30sp"
+                            android:textStyle="bold"
+                            tools:text="10"/>
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/margin_10dp"
+                            android:text="@string/versus"/>
+                    <TextView
+                            android:id="@+id/tv_score_away"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:layout_marginStart="@dimen/margin_10dp"
+                            android:textSize="@dimen/text_dimens_30sp"
+                            tools:text="10"/>
+
+                </LinearLayout>
+
+                <!-- Team Away -->
+                <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_weight="0.35">
+
+                    <ImageView
+                            android:id="@+id/iv_team_away"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            tools:src="@drawable/img_bayern"
+                            android:contentDescription="@null"/>
+
+                    <TextView
+                            android:id="@+id/tv_team_away"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_10dp"
+                            android:textSize="@dimen/text_dimens_14sp"
+                            android:textColor="@color/colorPrimary"
+                            android:textStyle="bold"
+                            tools:text="Title"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_grey"/>
+
+            <!-- Goals & Shoot Wrapper-->
+
+
+                <!-- Goals -->
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/margin_5dp"
+                        android:paddingEnd="@dimen/margin_10dp"
+                        android:paddingStart="@dimen/margin_10dp"
+                        android:weightSum="1">
+
+                    <TextView
+                            android:id="@+id/tv_home_goal"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/text_dimens_12sp"
+                            android:layout_weight="0.375"
+                            android:textAlignment="textStart"
+                            android:textColor="@android:color/black"
+                            tools:text="contoh teks atau dummy dalam industri percetakan dan "/>
+
+
+                    <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimary"
+                            android:textAlignment="center"
+                            android:layout_weight="0.25"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/text_dimens_12sp"
+                            android:text="@string/goals_title"/>
+
+
+                    <TextView
+                            android:id="@+id/tv_away_goal"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/text_dimens_12sp"
+                            android:layout_weight="0.375"
+                            android:textAlignment="viewEnd"
+                            android:textColor="@android:color/black"
+                            tools:text="contoh teks atau dummy dalam industri percetakan dan "/>
+
+                </LinearLayout>
+
+                <!-- Shoot -->
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingEnd="@dimen/margin_10dp"
+                        android:paddingStart="@dimen/margin_10dp"
+                        android:weightSum="1">
+
+                    <TextView
+                            android:id="@+id/tv_home_shoot"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/text_dimens_12sp"
+
+                            android:layout_weight="0.375"
+                            android:textAlignment="textStart"
+                            android:textColor="@android:color/black"
+                            tools:text="contoh teks atau dummy dalam industri percetakan dan "/>
+
+
+                    <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimary"
+                            android:textAlignment="center"
+                            android:layout_weight="0.25"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/text_dimens_12sp"
+                            android:text="@string/shoots_title"/>
+
+
+                    <TextView
+                            android:id="@+id/tv_away_shoot"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/text_dimens_12sp"
+
+                            android:layout_weight="0.375"
+                            android:textAlignment="viewEnd"
+                            android:textColor="@android:color/black"
+                            tools:text="contoh teks atau dummy dalam industri percetakan dan "/>
+
+                </LinearLayout>
+
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/color_grey"
+                    android:layout_marginTop="@dimen/margin_10dp"/>
+
+            <!-- Line up Wrapper-->
+
+
+                <!-- Goal Keaper -->
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingEnd="@dimen/margin_10dp"
+                        android:paddingStart="@dimen/margin_10dp"
+                        android:weightSum="1">
+
+                    <TextView
+                            android:id="@+id/tv_home_goalkeaper"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/text_dimens_12sp"
+                            android:layout_weight="0.375"
+                            android:textAlignment="viewStart"
+                            android:textColor="@android:color/black"
+                            tools:text="contoh teks atau dummy dalam industri percetakan dan "/>
+
+
+                    <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimary"
+                            android:textAlignment="center"
+                            android:layout_weight="0.25"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/text_dimens_12sp"
+                            android:text="@string/goals_keaper_title"/>
+
+
+                    <TextView
+                            android:id="@+id/tv_away_goalkeaper"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/text_dimens_12sp"
+                            android:layout_weight="0.375"
+                            android:textAlignment="viewEnd"
+                            android:textColor="@android:color/black"
+                            tools:text="contoh teks atau dummy dalam industri percetakan dan "/>
+
+                </LinearLayout>
+
+                <!-- defense -->
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingEnd="@dimen/margin_10dp"
+                        android:paddingStart="@dimen/margin_10dp"
+                        android:weightSum="1">
+
+                    <TextView
+                            android:id="@+id/tv_home_defense"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/text_dimens_12sp"
+                            android:layout_weight="0.375"
+                            android:textAlignment="viewStart"
+                            android:textColor="@android:color/black"
+                            tools:text="contoh teks atau dummy dalam industri percetakan dan "/>
+
+
+                    <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimary"
+                            android:textAlignment="center"
+                            android:layout_weight="0.25"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/text_dimens_12sp"
+                            android:text="@string/defense_title"/>
+
+
+                    <TextView
+                            android:id="@+id/tv_away_defense"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/text_dimens_12sp"
+                            android:layout_weight="0.375"
+                            android:textAlignment="viewEnd"
+                            android:textColor="@android:color/black"
+                            tools:text="contoh teks atau dummy dalam industri percetakan dan "/>
+
+                </LinearLayout>
+
+
+                <!-- Mid Field -->
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingEnd="@dimen/margin_10dp"
+                        android:paddingStart="@dimen/margin_10dp"
+                        android:weightSum="1">
+
+                    <TextView
+                            android:id="@+id/tv_home_modifield"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/text_dimens_12sp"
+
+                            android:layout_weight="0.375"
+                            android:textAlignment="viewStart"
+                            android:textColor="@android:color/black"
+                            tools:text="contoh teks atau dummy dalam industri percetakan dan "/>
+
+
+                    <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimary"
+                            android:textAlignment="center"
+                            android:layout_weight="0.25"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/text_dimens_12sp"
+                            android:text="@string/midfield_title"/>
+
+
+                    <TextView
+                            android:id="@+id/tv_away_modifield"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/text_dimens_12sp"
+                            android:layout_weight="0.375"
+                            android:textAlignment="viewEnd"
+                            android:textColor="@android:color/black"
+                            tools:text="contoh teks atau dummy dalam industri percetakan dan "/>
+
+                </LinearLayout>
+
+                <!-- Forward -->
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingEnd="@dimen/margin_10dp"
+                        android:paddingStart="@dimen/margin_10dp"
+                        android:weightSum="1">
+
+                    <TextView
+                            android:id="@+id/tv_home_forward"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/text_dimens_12sp"
+                            android:layout_weight="0.375"
+                            android:textAlignment="viewStart"
+                            android:textColor="@android:color/black"
+                            tools:text="contoh teks atau dummy dalam industri percetakan dan "/>
+
+
+                    <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimary"
+                            android:textAlignment="center"
+                            android:layout_weight="0.25"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/text_dimens_12sp"
+                            android:text="@string/forward_title"/>
+
+
+                    <TextView
+                            android:id="@+id/tv_away_forward"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/text_dimens_12sp"
+                            android:layout_weight="0.375"
+                            android:textAlignment="viewEnd"
+                            android:textColor="@android:color/black"
+                            tools:text="contoh teks atau dummy dalam industri percetakan dan "/>
+
+                </LinearLayout>
+
+                <!-- Subtitle -->
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingEnd="@dimen/margin_10dp"
+                        android:paddingStart="@dimen/margin_10dp"
+                        android:weightSum="1">
+
+                    <TextView
+                            android:id="@+id/tv_home_subtitutes"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/text_dimens_12sp"
+                            android:layout_weight="0.375"
+                            android:textAlignment="viewStart"
+                            android:textColor="@android:color/black"
+                            tools:text="contoh teks atau dummy dalam industri percetakan dan "/>
+
+
+                    <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimary"
+                            android:textAlignment="center"
+                            android:layout_weight="0.25"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/text_dimens_12sp"
+                            android:text="@string/subtitutes_title"/>
+
+
+                    <TextView
+                            android:id="@+id/tv_away_subtitutes"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/text_dimens_12sp"
+                            android:layout_weight="0.375"
+                            android:textAlignment="viewEnd"
+                            android:textColor="@android:color/black"
+                            tools:text="contoh teks atau dummy dalam industri percetakan dan "/>
+
+                </LinearLayout>
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
 </LinearLayout>
+
+
