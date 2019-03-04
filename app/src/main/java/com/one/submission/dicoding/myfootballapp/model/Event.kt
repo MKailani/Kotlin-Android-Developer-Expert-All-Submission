@@ -7,86 +7,127 @@ import kotlinx.android.parcel.Parcelize
 /**
  * Dicoding Academy
  *
- * Submission 2
+ * Submission 3
  * Kotlin Android Developer Expert (KADE)
  *
- * Created by kheys on 04/02/19.
+ * Created by kheys on 05/02/19.
  */
 @Parcelize
 data class Event(
-    @SerializedName("dateEvent")
-    var dateEvent: String?,
-    @SerializedName("idAwayTeam")
-    var idAwayTeam: String,
+    @SerializedName("id")
+    var id: Int?,
     @SerializedName("idEvent")
     var idEvent: String?,
+    @SerializedName("dateEvent")
+    var dateEvent: String?,
     @SerializedName("idHomeTeam")
-    var idHomeTeam: String,
-    @SerializedName("idLeague")
-    var idLeague: String?,
-    @SerializedName("idSoccerXML")
-    var idSoccerXML: String?,
-    @SerializedName("intAwayScore")
-    var intAwayScore: String?,
+    var idHomeTeam: String?,
+    @SerializedName("strHomeTeam")
+    var strHomeTeam: String?,
     @SerializedName("intHomeScore")
     var intHomeScore: String?,
-    @SerializedName("intRound")
-    var intRound: String?,
-    @SerializedName("strAwayFormation")
-    var strAwayFormation: String?,
-    @SerializedName("strAwayGoalDetails")
-    var strAwayGoalDetails: String?,
-    @SerializedName("strAwayLineupDefense")
-    var strAwayLineupDefense: String?,
-    @SerializedName("strAwayLineupForward")
-    var strAwayLineupForward: String?,
-    @SerializedName("strAwayLineupGoalkeeper")
-    var strAwayLineupGoalkeeper: String?,
-    @SerializedName("strAwayLineupMidfield")
-    var strAwayLineupMidfield: String?,
-    @SerializedName("strAwayLineupSubstitutes")
-    var strAwayLineupSubstitutes: String?,
-    @SerializedName("strAwayRedCards")
-    var strAwayRedCards: String?,
-    @SerializedName("strAwayTeam")
-    var strAwayTeam: String?,
-    @SerializedName("strAwayYellowCards")
-    var strAwayYellowCards: String?,
-    @SerializedName("strDate")
-    var strDate: String?,
-    @SerializedName("strEvent")
-    var strEvent: String?,
-    @SerializedName("strFilename")
-    var strFilename: String?,
     @SerializedName("strHomeFormation")
     var strHomeFormation: String?,
     @SerializedName("strHomeGoalDetails")
     var strHomeGoalDetails: String?,
-    @SerializedName("strHomeLineupDefense")
-    var strHomeLineupDefense: String?,
-    @SerializedName("strHomeLineupForward")
-    var strHomeLineupForward: String?,
+    @SerializedName("intHomeShots")
+    var intHomeShots: String?,
     @SerializedName("strHomeLineupGoalkeeper")
     var strHomeLineupGoalkeeper: String?,
+    @SerializedName("strHomeLineupDefense")
+    var strHomeLineupDefense: String?,
     @SerializedName("strHomeLineupMidfield")
     var strHomeLineupMidfield: String?,
+    @SerializedName("strHomeLineupForward")
+    var strHomeLineupForward: String?,
     @SerializedName("strHomeLineupSubstitutes")
     var strHomeLineupSubstitutes: String?,
-    @SerializedName("strHomeRedCards")
-    var strHomeRedCards: String?,
-    @SerializedName("strHomeTeam")
-    var strHomeTeam: String?,
-    @SerializedName("strHomeYellowCards")
-    var strHomeYellowCards: String?,
-    @SerializedName("strLeague")
-    var strLeague: String?,
-    @SerializedName("strLocked")
-    var strLocked: String?,
-    @SerializedName("strSeason")
-    var strSeason: String?,
-    @SerializedName("strSport")
-    var strSport: String?,
-    @SerializedName("strTime")
-    var strTime: String?
-): Parcelable
+    @SerializedName("idAwayTeam")
+    var idAwayTeam: String?,
+    @SerializedName("strAwayTeam")
+    var strAwayTeam: String?,
+    @SerializedName("intAwayScore")
+    var intAwayScore: String?,
+    @SerializedName("strAwayFormation")
+    var strAwayFormation: String?,
+    @SerializedName("strAwayGoalDetails")
+    var strAwayGoalDetails: String?,
+    @SerializedName("intAwayShots")
+    var intAwayShots: String?,
+    @SerializedName("strAwayLineupGoalkeeper")
+    var strAwayLineupGoalkeeper: String?,
+    @SerializedName("strAwayLineupDefense")
+    var strAwayLineupDefense: String?,
+    @SerializedName("strAwayLineupMidfield")
+    var strAwayLineupMidfield: String?,
+    @SerializedName("strAwayLineupForward")
+    var strAwayLineupForward: String?,
+    @SerializedName("strAwayLineupSubstitutes")
+    var strAwayLineupSubstitutes: String?
+) : Parcelable {
+    // Favorite Sport
+    companion object {
+        const val ID = "ID"
+        const val ID_EVENT = "ID_EVENT"
+        const val DATE_EVENT = "DATE"
+        const val HOME_ID = "HOME_ID"
+        const val HOME_TEAM = "HOME_TEAM"
+        const val HOME_SCORE = "HOME_SCORE"
+        const val HOME_FORMATION = "HOME_FORMATION"
+        const val HOME_GOAL_DETAILS = "HOME_GOAL_DETAILS"
+        const val HOME_SHOTS = "HOME_SHOTS"
+        const val HOME_LINEUP_GOALKEEPER = "HOME_LINEUP_GOALKEEPER"
+        const val HOME_LINEUP_DEFENSE = "HOME_LINEUP_DEFENSE"
+        const val HOME_LINEUP_MIDFIELD = "HOME_LINEUP_MIDFIELD"
+        const val HOME_LINEUP_FORWARD = "HOME_LINEUP_FORWARD"
+        const val HOME_LINEUP_SUBSTITUTES = "HOME_LINEUP_SUBSTITUTES"
+        const val AWAY_ID = "AWAY_ID"
+        const val AWAY_TEAM = "AWAY_TEAM"
+        const val AWAY_SCORE = "AWAY_SCORE"
+        const val AWAY_FORMATION = "AWAY_FORMATION"
+        const val AWAY_GOAL_DETAILS = "AWAY_GOAL_DETAILS"
+        const val AWAY_SHOTS = "AWAY_SHOTS"
+        const val AWAY_LINEUP_GOALKEEPER = "AWAY_LINEUP_GOALKEEPER"
+        const val AWAY_LINEUP_DEFENSE = "AWAY_LINEUP_DEFENSE"
+        const val AWAY_LINEUP_MIDFIELD = "AWAY_LINEUP_MIDFIELD"
+        const val AWAY_LINEUP_FORWARD = "AWAY_LINEUP_FORWARD"
+        const val AWAY_LINEUP_SUBSTITUTES = "AWAY_LINEUP_SUBSTITUTES"
+
+        fun pairToValueFieldDb(event: Event): Array<Pair<String, Any?>> = arrayOf(
+
+            ID_EVENT to event.idEvent,
+            DATE_EVENT to event.dateEvent,
+            HOME_ID to event.idHomeTeam,
+            HOME_TEAM to event.strHomeTeam,
+            HOME_SCORE to event.intHomeScore,
+            HOME_FORMATION to event.strHomeFormation,
+            HOME_GOAL_DETAILS to event.strHomeGoalDetails,
+            HOME_SHOTS to event.intHomeScore,
+            HOME_LINEUP_GOALKEEPER to event.strHomeLineupGoalkeeper,
+            HOME_LINEUP_DEFENSE to event.strHomeLineupDefense,
+            HOME_LINEUP_MIDFIELD to event.strHomeLineupMidfield,
+            HOME_LINEUP_FORWARD to event.strHomeLineupForward,
+            HOME_LINEUP_SUBSTITUTES to event.strHomeLineupSubstitutes,
+
+            AWAY_ID to event.idAwayTeam,
+            AWAY_TEAM to event.strAwayTeam,
+            AWAY_SCORE to event.intAwayScore,
+            AWAY_FORMATION to event.strAwayFormation,
+            AWAY_GOAL_DETAILS to event.strAwayGoalDetails,
+            AWAY_SHOTS to event.intAwayScore,
+            AWAY_LINEUP_GOALKEEPER to event.strAwayLineupGoalkeeper,
+            AWAY_LINEUP_DEFENSE to event.strAwayLineupDefense,
+            AWAY_LINEUP_MIDFIELD to event.strAwayLineupMidfield,
+            AWAY_LINEUP_FORWARD to event.strAwayLineupForward,
+            AWAY_LINEUP_SUBSTITUTES to event.strAwayLineupSubstitutes
+        )
+    }
+}
+
+
+
+
+
+
+
 

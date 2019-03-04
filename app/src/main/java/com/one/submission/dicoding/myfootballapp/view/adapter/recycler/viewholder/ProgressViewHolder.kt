@@ -13,6 +13,6 @@ import com.one.submission.dicoding.myfootballapp.R
  *
  * Created by kheys on 04/02/19.
  */
-class ProgressViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
-    val progresBar =itemView?.findViewById(R.id.pbLoading) as ProgressBar
+class ProgressViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    val progresBar =itemView.findViewById(R.id.pbLoading) as ProgressBar
 }

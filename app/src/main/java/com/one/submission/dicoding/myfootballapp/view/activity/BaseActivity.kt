@@ -2,30 +2,32 @@ package com.one.submission.dicoding.myfootballapp.view.activity
 
 import android.content.Intent
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import com.one.submission.dicoding.myfootballapp.R
+import com.one.submission.dicoding.myfootballapp.view.fragment.LastMatchFragment
 
 /**
  * Dicoding Academy
  *
- * Submission 2
+ * Submission 3
  * Kotlin Android Developer Expert (KADE)
  *
- * Created by kheys on 04/02/19.
+ * Created by kheys on 05/02/19.
  */
 abstract class BaseActivity : AppCompatActivity(){
 
     private fun popBackStack() {
-        val backstackCount = fragmentManager.backStackEntryCount
+        val backstackCount = supportFragmentManager.backStackEntryCount
         if (backstackCount - 2 >= 0) {
-            var backstackName: String? = fragmentManager.getBackStackEntryAt(backstackCount - 2).name
+            var backstackName: String? = supportFragmentManager.getBackStackEntryAt(backstackCount - 2).name
             backstackName = backstackName ?: ""
 
             if (TextUtils.isEmpty(backstackName)) {
                 goToHomeScreen()
             } else {
-                fragmentManager.popBackStackImmediate()
+                supportFragmentManager.popBackStackImmediate()
             }
         } else {
             goToHomeScreen()
@@ -45,11 +47,15 @@ abstract class BaseActivity : AppCompatActivity(){
             popBackStack()
     }
 
+    fun replaceFragment(fragment: Fragment, tagFragment:String?) {
 
-    fun replaceFragment(fragment: Fragment) = replaceFragment(fragment,null)
+        // Clear Backstack if user click Now Playing
+        if (fragment is LastMatchFragment) {
+            if (supportFragmentManager.backStackEntryCount - 2 >= 0) {
+                goToTopFragment()
+            }
 
-
-    private fun replaceFragment(fragment: Fragment, tagFragment:String?) {
+        }
         if(!TextUtils.isEmpty(tagFragment))
             supportFragmentManager
                 .beginTransaction()
@@ -63,4 +69,11 @@ abstract class BaseActivity : AppCompatActivity(){
                 .addToBackStack(null)
                 .commit()
     }
+
+    private fun goToTopFragment() {
+        supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+    }
+
+    fun getCurrentFragment() : Fragment? = supportFragmentManager.findFragmentById(R.id.fl_screen)
+
 }

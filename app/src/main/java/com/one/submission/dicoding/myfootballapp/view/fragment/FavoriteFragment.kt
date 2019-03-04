@@ -2,13 +2,12 @@ package com.one.submission.dicoding.myfootballapp.view.fragment
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.one.submission.dicoding.myfootballapp.R
 import com.one.submission.dicoding.myfootballapp.model.Event
-import com.one.submission.dicoding.myfootballapp.presenter.fragment.LastMatchPresenter
+import com.one.submission.dicoding.myfootballapp.presenter.fragment.FavoritePresenter
 import com.one.submission.dicoding.myfootballapp.utils.extension.hide
 import com.one.submission.dicoding.myfootballapp.utils.extension.show
 import com.one.submission.dicoding.myfootballapp.view.activity.MainActivity
@@ -24,23 +23,23 @@ import kotlinx.android.synthetic.main.fragment_recycler_item.*
  *
  * Created by kheys on 05/02/19.
  */
-class LastMatchFragment : BaseFragment(), CommonView {
+class FavoriteFragment : BaseFragment(), CommonView {
 
-    private lateinit var presenter: LastMatchPresenter
+    override fun goToNextActivity(event: Event) {
+
+        (activity as MainActivity).goToNextActivity(event)
+    }
+
+    private lateinit var presenter: FavoritePresenter
     private lateinit var layoutManager: LinearLayoutManager
-    private lateinit var adapter : MatchAdapter
-    private var isLoading = false
-    private var page = 1
-    private var counter = 1
-    private var totalItemCount: Int = 0
-    private var lastVisibleItem: Int = 0
-    private var lastItemCounter = 0
+    private lateinit var  adapter : MatchAdapter
+
 
     companion object {
-        val TAG:String = LastMatchFragment::class.java.simpleName
+        val TAG:String = FavoriteFragment::class.java.simpleName
 
-        fun newInstance(): LastMatchFragment {
-            return LastMatchFragment()
+        fun newInstance(): FavoriteFragment {
+            return FavoriteFragment()
         }
     }
 
@@ -51,17 +50,20 @@ class LastMatchFragment : BaseFragment(), CommonView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // Init Presenter
+        presenter = FavoritePresenter(this, view.context)
 
-        presenter = LastMatchPresenter(this)
+    }
+
+    override fun onResume() {
+        super.onResume()
 
         // Load Data
         setupRecycler()
-        setupListener()
         loadData()
     }
 
     override fun setupRecycler() {
-
         adapter = MatchAdapter(presenter)
         layoutManager = LinearLayoutManager(
             activity,
@@ -74,36 +76,27 @@ class LastMatchFragment : BaseFragment(), CommonView {
 
     }
 
-    override fun setupListener() {
-
-        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                totalItemCount = layoutManager.itemCount
-                lastVisibleItem = layoutManager.findLastVisibleItemPosition()
-                val visibleThreshold = 1
-                if (lastItemCounter > 19 && !isLoading && totalItemCount <= lastVisibleItem + visibleThreshold) {
-                    page = counter
-                    presenter.doLastMatch()
-                }
-            }
-        })
-    }
-
     override fun loadData() {
-        presenter.doLastMatch()
+        presenter.doFavoriteMatch()
     }
 
-
-    override fun showData(listData: MutableList<Event>) {
-        adapter.addList(listData)
-    }
 
     override fun showLoading() {
         pbLoading?.show()
     }
 
-    override fun goToNextActivity(event: Event) {
-        (activity as MainActivity).goToNextActivity(event)
+    override fun setupListener() {
+        //TODO: if you need Listener Event
+    }
+
+
+    override fun showData(listData: MutableList<Event>) {
+        dismissLoading()
+        adapter.addList(listData)
+        if(listData.size > 0)
+            tvNoData.hide()
+        else
+            tvNoData.show()
     }
 
 
@@ -111,6 +104,4 @@ class LastMatchFragment : BaseFragment(), CommonView {
         pbLoading?.hide()
 
     }
-
 }
-

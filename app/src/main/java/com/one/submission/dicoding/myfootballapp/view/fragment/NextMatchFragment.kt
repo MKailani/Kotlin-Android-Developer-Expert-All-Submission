@@ -10,8 +10,6 @@ import com.one.submission.dicoding.myfootballapp.R
 import com.one.submission.dicoding.myfootballapp.model.Event
 import com.one.submission.dicoding.myfootballapp.presenter.fragment.NextMatchPresenter
 import com.one.submission.dicoding.myfootballapp.utils.extension.hide
-import com.one.submission.dicoding.myfootballapp.utils.extension.setFalse
-import com.one.submission.dicoding.myfootballapp.utils.extension.setTrue
 import com.one.submission.dicoding.myfootballapp.utils.extension.show
 import com.one.submission.dicoding.myfootballapp.view.activity.MainActivity
 import com.one.submission.dicoding.myfootballapp.view.adapter.recycler.MatchAdapter
@@ -21,10 +19,10 @@ import kotlinx.android.synthetic.main.fragment_recycler_item.*
 /**
  * Dicoding Academy
  *
- * Submission 2
+ * Submission 3
  * Kotlin Android Developer Expert (KADE)
  *
- * Created by kheys on 04/02/19.
+ * Created by kheys on 05/02/19.
  */
 class NextMatchFragment : BaseFragment(), CommonView {
     override fun goToNextActivity(event: Event) {
@@ -41,6 +39,14 @@ class NextMatchFragment : BaseFragment(), CommonView {
     private var totalItemCount: Int = 0
     private var lastVisibleItem: Int = 0
     private var lastItemCounter = 0
+
+    companion object {
+        val TAG:String = NextMatchFragment::class.java.simpleName
+
+        fun newInstance(): NextMatchFragment {
+            return NextMatchFragment()
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_recycler_item, container, false)
@@ -75,7 +81,7 @@ class NextMatchFragment : BaseFragment(), CommonView {
     override fun setupListener() {
 
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 totalItemCount = layoutManager.itemCount
                 lastVisibleItem = layoutManager.findLastVisibleItemPosition()
                 val visibleThreshold = 1
@@ -98,13 +104,11 @@ class NextMatchFragment : BaseFragment(), CommonView {
     }
 
     override fun showLoading() {
-        isLoading.setTrue()
         pbLoading?.show()
     }
 
 
     override fun dismissLoading() {
-        isLoading.setFalse()
         pbLoading?.hide()
 
     }

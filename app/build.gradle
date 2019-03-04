@@ -3,12 +3,11 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     defaultConfig {
         applicationId "com.one.submission.dicoding.myfootballapp"
         minSdkVersion 21
-        //noinspection OldTargetApi
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -36,6 +35,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "com.android.support:appcompat-v7:$support_library"
     implementation "com.android.support:support-v4:$support_library"
+    implementation "com.android.support:design:$support_library"
     implementation "com.android.support.constraint:constraint-layout:$contrainstlayout_version"
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "com.android.support.test:runner:$jrunner_version"
@@ -46,9 +46,8 @@ dependencies {
     implementation "org.jetbrains.anko:anko-design:$anko_version"
     implementation "org.jetbrains.anko:anko-recyclerview-v7:$anko_version"
 
-    // Anko Layouts
-    implementation "org.jetbrains.anko:anko-sdk25:$anko_version"
-    implementation "org.jetbrains.anko:anko-appcompat-v7:$anko_version"
+    // Anko Sqlite
+    implementation "org.jetbrains.anko:anko-sqlite:$anko_version"
 
     // Anko coroutines
     implementation "org.jetbrains.anko:anko-sdk25-coroutines:$anko_version"

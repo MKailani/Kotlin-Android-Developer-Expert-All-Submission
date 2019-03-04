@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">MyFootballApp</string>
-
+    <string name="app_name">MyFootballDbApp</string>
 
     <!-- Fragment Title -->
     <string name="last_match_fragment_title">Last Match</string>
@@ -18,5 +17,13 @@
     <string name="main_title_toolbar">Football Match Schedule</string>
     <string name="detail_title_toolbar">Match Detail</string>
 
+
+    <!-- Menu ToolBar-->
+    <string name="title_bar_favorite">Favorite</string>
+    <string name="title_bar_last_match">@string/last_match_fragment_title</string>
+    <string name="title_bar_next_match">@string/next_match_fragment_title</string>
+    <string name="remove_favorite_message">Remove to Favorite</string>
+    <string name="add_favorite_message">Added to Favorite</string>
+    <string name="no_data_message">Tidak ada data</string>
 
 </resources>

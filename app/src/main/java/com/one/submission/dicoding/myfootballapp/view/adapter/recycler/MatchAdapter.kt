@@ -6,33 +6,33 @@ import android.view.View
 import android.view.ViewGroup
 import com.one.submission.dicoding.myfootballapp.R
 import com.one.submission.dicoding.myfootballapp.model.Event
+import com.one.submission.dicoding.myfootballapp.presenter.fragment.FavoritePresenter
 import com.one.submission.dicoding.myfootballapp.presenter.fragment.LastMatchPresenter
 import com.one.submission.dicoding.myfootballapp.presenter.fragment.NextMatchPresenter
 import com.one.submission.dicoding.myfootballapp.view.adapter.recycler.viewholder.ProgressViewHolder
 import kotlinx.android.synthetic.main.row_item_match.view.*
 
-
 /**
  * Dicoding Academy
  *
- * Submission 2
+ * Submission 3
  * Kotlin Android Developer Expert (KADE)
  *
- * Created by kheys on 04/02/19.
+ * Created by kheys on 05/02/19.
  */
-class MatchAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class MatchAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    // final static
+    companion object {
+        private const val VIEW_PROGRESS: Int = 0
+        private const val VIEW_ITEM: Int = 1
+    }
 
     var lastMatchPresenter: LastMatchPresenter? = null
     var nextMatchPresenter: NextMatchPresenter? = null
+    var favoritePresenter: FavoritePresenter? = null
 
-    companion object {
-        private const val VIEW_PROGRESS:Int = 0
-        private const val VIEW_ITEM:Int = 1
-    }
-
-
-    var mDataset: MutableList<Event>? = ArrayList()
+    var mDataset: MutableList<Event?> = ArrayList()
 
     constructor(lastMatchPresenter: LastMatchPresenter) : this() {
         this.lastMatchPresenter = lastMatchPresenter
@@ -42,37 +42,40 @@ class MatchAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
         this.nextMatchPresenter = nextMatchPresenter
     }
 
-
-    fun addList(mDataset: MutableList<Event>) {
-        this.mDataset!!.addAll(mDataset)
-        this.notifyDataSetChanged()
+    constructor(favoritePresenter: FavoritePresenter) : this() {
+        this.favoritePresenter = favoritePresenter
     }
 
 
-    override fun getItemCount(): Int = mDataset!!.size
+    fun addList(mDataset: MutableList<Event>) {
+        this.mDataset.addAll(mDataset)
+        this.notifyDataSetChanged()
+    }
+
+    override fun getItemCount(): Int = mDataset.size
 
     override fun getItemViewType(position: Int): Int {
-        return if(mDataset?.get(position) !=null) VIEW_ITEM else VIEW_PROGRESS
+        return if (mDataset[position] != null) VIEW_ITEM else VIEW_PROGRESS
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view: View
-        when(viewType){
+        when (viewType) {
             VIEW_ITEM -> {
                 view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.row_item_match,parent,false)
+                    .inflate(R.layout.row_item_match, parent, false)
 
-                return  MatchViewHolder(view)
+                return MatchViewHolder(view)
             }
 
             VIEW_PROGRESS -> {
                 view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.row_item_progressbar,parent,false)
+                    .inflate(R.layout.row_item_progressbar, parent, false)
                 return ProgressViewHolder(view)
             }
-            else ->{
+            else -> {
                 view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.row_item_progressbar,parent,false)
+                    .inflate(R.layout.row_item_progressbar, parent, false)
                 return ProgressViewHolder(view)
             }
 
@@ -81,17 +84,17 @@ class MatchAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if(holder is MatchViewHolder){
-            holder.bind(mDataset!![position])
-        }else if(holder is ProgressViewHolder){
+        if (holder is MatchViewHolder) {
+            mDataset[position]?.let { holder.bind(it) }
+        } else if (holder is ProgressViewHolder) {
             holder.progresBar.isIndeterminate = true
         }
     }
 
 
-    inner class MatchViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
+    inner class MatchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(item: Event) = with(itemView){
+        fun bind(item: Event) = with(itemView) {
             itemView.tvDate.text = item.dateEvent
             itemView.tvHome.text = item.strHomeTeam
             itemView.tvHomeScore.text = item.intHomeScore
@@ -100,16 +103,17 @@ class MatchAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
 
             setOnClickListener {
-                mDataset?.get(adapterPosition)?.let { data ->
+                mDataset[adapterPosition]?.let { data ->
 
                     lastMatchPresenter?.mView?.goToNextActivity(data)
                     nextMatchPresenter?.mView?.goToNextActivity(data)
+                    favoritePresenter?.mView?.goToNextActivity(data)
                 }
-
 
             }
 
         }
 
     }
+
 }

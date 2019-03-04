@@ -5,24 +5,15 @@ import android.view.View
 /**
  * Dicoding Academy
  *
- * Submission 2
- * Kotlin Android Developer Expert (MADE)
+ * Submission 3
+ * Kotlin Android Developer Expert (KADE)
  *
- * Created by kheys on 04/02/19.
+ * Created by kheys on 05/02/19.
  */
 fun View.show(){
     visibility = View.VISIBLE
 }
 
-
 fun View.hide(){
     visibility = View.GONE
-}
-
-fun Boolean.setTrue(): Boolean{
-    return true
-}
-
-fun Boolean.setFalse(): Boolean{
-    return false
 }

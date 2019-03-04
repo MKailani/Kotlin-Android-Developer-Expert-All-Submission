@@ -8,4 +8,5 @@
                                    android:background="?attr/colorPrimary"
                                    tools:title="Title Toolbar"
                                    app:titleTextColor="@android:color/white"
-                                   app:theme="@style/ToolbarTheme" tools:ignore="Overdraw"/>
+                                   app:theme="@style/ToolbarTheme"
+                                   tools:ignore="Overdraw"/>

@@ -1,6 +1,7 @@
 package com.one.submission.dicoding.myfootballapp.view.activity
 
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import com.one.submission.dicoding.myfootballapp.R
 import com.one.submission.dicoding.myfootballapp.model.Event
@@ -12,18 +13,24 @@ import com.one.submission.dicoding.myfootballapp.utils.extension.show
 import com.one.submission.dicoding.myfootballapp.view.activity.iview.DetailView
 import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.top_toolbar.*
+import org.jetbrains.anko.design.snackbar
 
 /**
  * Dicoding Academy
  *
- * Submission 2
+ * Submission 3
  * Kotlin Android Developer Expert (KADE)
  *
- * Created by kheys on 04/02/19.
+ * Created by kheys on 05/02/19.
  */
 class DetailActivity : BaseActivity(), DetailView {
 
+
+
     private lateinit var mPresenter: DetailPresenter
+    private var menuItemFav: Menu? = null
+    private var isFavorite = false
+    private lateinit var event: Event
 
     companion object {
         const val EXTRA_EVENT = "extra:event"
@@ -34,7 +41,7 @@ class DetailActivity : BaseActivity(), DetailView {
         setContentView(R.layout.activity_detail)
 
         // Initialize Presenter
-        mPresenter = DetailPresenter(this)
+        mPresenter = DetailPresenter(this,applicationContext)
 
         // Load View
         setupToolbar()
@@ -52,14 +59,16 @@ class DetailActivity : BaseActivity(), DetailView {
     override fun loadView() {
 
         // Get Ientent
-        val event = intent.getParcelableExtra<Event>(EXTRA_EVENT)
+        event = intent.getParcelableExtra(EXTRA_EVENT)
 
         // Home
-        mPresenter.doLoadImageTeam(event.idHomeTeam, DetailPresenter.TypeTeam.HOME)
+        mPresenter.doLoadImageTeam(event.idHomeTeam.toString(), DetailPresenter.TypeTeam.HOME)
 
         // Away
-        mPresenter.doLoadImageTeam(event.idAwayTeam, DetailPresenter.TypeTeam.AWAY)
+        mPresenter.doLoadImageTeam(event.idAwayTeam.toString(), DetailPresenter.TypeTeam.AWAY)
 
+        //Load Favorite
+        isFavorite = mPresenter.isFavorite(event.idEvent)
 
         // Extension
         tv_team_home.text = event.strHomeTeam ?: ""
@@ -80,6 +89,7 @@ class DetailActivity : BaseActivity(), DetailView {
         tv_away_forward.text = event.strAwayLineupForward ?: ""
         tv_home_subtitutes.text = event.strHomeLineupSubstitutes ?: ""
         tv_away_subtitutes.text = event.strAwayLineupSubstitutes ?: ""
+
     }
 
     override fun showLoading() {
@@ -97,22 +107,47 @@ class DetailActivity : BaseActivity(), DetailView {
         if (type == DetailPresenter.TypeTeam.HOME)
 
             iv_team_home?.let {
-                Utils.loadImage(applicationContext,iv_team_home, teams[0].strTeamBadge)
+                Utils.loadImage(applicationContext, iv_team_home, teams[0].strTeamBadge)
             }
 
         if (type == DetailPresenter.TypeTeam.AWAY)
-            iv_team_away?.let{
-                Utils.loadImage(applicationContext,iv_team_away, teams[0].strTeamBadge)
+            iv_team_away?.let {
+                Utils.loadImage(applicationContext, iv_team_away, teams[0].strTeamBadge)
             }
     }
 
-
-override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-    when (item?.itemId) {
-        android.R.id.home -> {
-            super.onBackPressed()
-        }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.option_menu_favorite, menu)
+        menuItemFav = menu
+        setFavorite()
+        return super.onCreateOptionsMenu(menu)
     }
-    return false
-}
+
+    override fun selectedIconFav(isSelected: Boolean) {
+        isFavorite = isSelected
+        Utils.menuIconDrawable(applicationContext, menuItemFav?.getItem(0), isSelected)
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            android.R.id.home -> {
+                super.onBackPressed()
+            }
+            R.id.action_menu_favorite -> {
+                mPresenter.doFavorite(isFavorite,event)
+            }
+        }
+        return false
+    }
+
+    private fun setFavorite(){
+        selectedIconFav(isFavorite)
+    }
+
+    override fun showMessage(message: String) {
+        ll_wrapper.snackbar(message)
+    }
+
+
 }

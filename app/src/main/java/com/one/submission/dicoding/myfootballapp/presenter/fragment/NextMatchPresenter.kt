@@ -13,10 +13,10 @@ import retrofit2.Response
 /**
  * Dicoding Academy
  *
- * Submission 2
+ * Submission 3
  * Kotlin Android Developer Expert (KADE)
  *
- * Created by kheys on 04/02/19.
+ * Created by kheys on 05/02/19.
  */
 class NextMatchPresenter(val mView: CommonView) {
     private var restClient : RestClient = RestClient()

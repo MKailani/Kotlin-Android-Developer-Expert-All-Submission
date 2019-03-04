@@ -6,15 +6,17 @@ import com.one.submission.dicoding.myfootballapp.presenter.activity.DetailPresen
 /**
  * Dicoding Academy
  *
- * Submission 2
+ * Submission 3
  * Kotlin Android Developer Expert (KADE)
  *
- * Created by kheys on 04/02/19.
+ * Created by kheys on 05/02/19.
  */
 interface DetailView {
     fun setupToolbar()
     fun loadView()
     fun loadImage(type: DetailPresenter.TypeTeam, teams:List<Team>)
     fun showLoading()
+    fun showMessage(message:String)
     fun dismissLoading()
+    fun selectedIconFav(isSelected:Boolean)
 }
