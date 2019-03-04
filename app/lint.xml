@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="IconLocation">
+        <ignore path="src/main/res/drawable/img_acm.png" />
+        <ignore path="src/main/res/drawable/img_arsenal.png" />
+        <ignore path="src/main/res/drawable/img_barca.png" />
+        <ignore path="src/main/res/drawable/img_bayern.png" />
+        <ignore path="src/main/res/drawable/img_chelsea.png" />
+        <ignore path="src/main/res/drawable/img_city.png" />
+        <ignore path="src/main/res/drawable/img_madrid.png" />
+        <ignore path="src/main/res/drawable/img_mu.png" />
+        <ignore path="src/main/res/drawable/img_mu.png" />
+        <ignore path="src/main/res/drawable/img_mu.png" />
+        <ignore path="src/main/res/drawable/img_mu.png" />
+    </issue>
+</lint>

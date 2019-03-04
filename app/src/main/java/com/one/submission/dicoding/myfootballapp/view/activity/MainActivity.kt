@@ -20,13 +20,13 @@ import org.jetbrains.anko.setContentView
  */
 class MainActivity : BaseActivity(), MainView {
 
-    var listFootbal:MutableList<Football> = ArrayList()
-    lateinit var presenter:MainPresenter
+    private var listFootbal:MutableList<Football> = ArrayList()
+    private lateinit var presenter:MainPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        presenter = MainPresenter(this, this.applicationContext)
+        presenter = MainPresenter(this)
 
         // Initialize
         prepareData()

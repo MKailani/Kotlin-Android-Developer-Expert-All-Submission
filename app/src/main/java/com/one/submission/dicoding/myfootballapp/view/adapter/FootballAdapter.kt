@@ -21,7 +21,7 @@ import org.jetbrains.anko.AnkoContext
  *
  * Created by kheys on 30/01/19.
  */
-class FootballAdapter(val mPresenter: MainPresenter) : RecyclerView.Adapter<FootballAdapter.ViewHolder>() {
+class FootballAdapter(private val mPresenter: MainPresenter) : RecyclerView.Adapter<FootballAdapter.ViewHolder>() {
 
      var mDataset: MutableList<Football> = ArrayList()
 
@@ -43,9 +43,9 @@ class FootballAdapter(val mPresenter: MainPresenter) : RecyclerView.Adapter<Foot
     override fun getItemCount(): Int = mDataset.size
 
 
-    inner class ViewHolder(itemView: View?, val mPresenter: MainPresenter) : RecyclerView.ViewHolder(itemView) {
-        val ivFootbal: ImageView = itemView?.findViewById(R.id.iv_icon) as ImageView
-        val tvTitle: TextView = itemView?.findViewById(R.id.tv_title) as TextView
+    inner class ViewHolder(itemView: View?, private val mPresenter: MainPresenter) : RecyclerView.ViewHolder(itemView) {
+        private val ivFootbal: ImageView = itemView?.findViewById(R.id.iv_icon) as ImageView
+        private val tvTitle: TextView = itemView?.findViewById(R.id.tv_title) as TextView
 
         fun bind(data: Football) {
             // Load Image

@@ -15,7 +15,7 @@ import org.jetbrains.anko.recyclerview.v7.recyclerView
  *
  * Created by kheys on 30/01/19.
  */
-class RecyclerItemUI<T : RecyclerView.ViewHolder?>(val mAdapter : RecyclerView.Adapter<T>)
+class RecyclerItemUI<T : RecyclerView.ViewHolder?>(private val mAdapter : RecyclerView.Adapter<T>)
     : AnkoComponent<Activity> {
     override fun createView(ui: AnkoContext<Activity>) = with(ui) {
         relativeLayout {
