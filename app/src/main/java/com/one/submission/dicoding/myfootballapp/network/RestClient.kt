@@ -10,28 +10,22 @@ import java.util.concurrent.TimeUnit
 /**
  * Dicoding Academy
  *
- * Submission 3
+ * Submission 4
  * Kotlin Android Developer Expert (KADE)
  *
- * Created by kheys on 05/02/19.
+ * Created by kheys on 06/02/19.
  */
-class RestClient {
+object RestClient {
 
-    companion object {
-        private const val TIMEOUT_DEFAULT = 20
-        private const val TIMEOUT_LONG = 120
-        private const val BASE_URL = BuildConfig.BASE_URL +"/"+BuildConfig.API_KEY+"/"
+    private const val TIMEOUT_DEFAULT = 15
+    private const val TIMEOUT_LONG = 120
+    private const val BASE_URL = BuildConfig.BASE_URL + "/" + BuildConfig.API_KEY + "/"
+
+    fun <T> createService(service: Class<T>): T {
+        return iniRetrofit(false).create(service)
     }
 
-    private lateinit var apiService: ApiService
-
-    constructor() : this(false)
-
-    private constructor(longRequest: Boolean) {
-        this(longRequest, BASE_URL)
-    }
-
-    private operator fun invoke(longRequest: Boolean, baseUrl: String) {
+    private fun iniRetrofit(longRequest: Boolean): Retrofit {
         var timeOut = TIMEOUT_DEFAULT
 
         if (longRequest) {
@@ -40,7 +34,7 @@ class RestClient {
 
         // Logging Service Success or not REST Client
         val interceptor = HttpLoggingInterceptor()
-        with(interceptor){
+        with(interceptor) {
             level = HttpLoggingInterceptor.Level.BODY
         }
 
@@ -54,15 +48,13 @@ class RestClient {
         }
 
         // Retrofit Client
-        apiService = with(Retrofit.Builder())
-                    {
-                        baseUrl(baseUrl)
-                        client(okClient)
-                        addConverterFactory(GsonConverterFactory.create())
-                        build()
-                    }.create(ApiService::class.java)
+        return with(Retrofit.Builder())
+        {
+            baseUrl(BASE_URL)
+            client(okClient)
+            addConverterFactory(GsonConverterFactory.create())
+            build()
+        }
     }
-
-    fun getApiService(): ApiService = apiService
 
 }

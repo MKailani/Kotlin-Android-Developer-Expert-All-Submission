@@ -1,31 +1,36 @@
 package com.one.submission.dicoding.myfootballapp.view.activity
 
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.view.Menu
 import android.view.MenuItem
 import com.one.submission.dicoding.myfootballapp.R
+import com.one.submission.dicoding.myfootballapp.database.QueryHelper
+import com.one.submission.dicoding.myfootballapp.database.database
 import com.one.submission.dicoding.myfootballapp.model.Event
-import com.one.submission.dicoding.myfootballapp.model.Team
+import com.one.submission.dicoding.myfootballapp.network.RepositoryApi
+import com.one.submission.dicoding.myfootballapp.network.response.ResponseTeamFootball
 import com.one.submission.dicoding.myfootballapp.presenter.activity.DetailPresenter
 import com.one.submission.dicoding.myfootballapp.utils.Utils
+import com.one.submission.dicoding.myfootballapp.utils.espresso.EspressoIdlingResource
 import com.one.submission.dicoding.myfootballapp.utils.extension.hide
 import com.one.submission.dicoding.myfootballapp.utils.extension.show
 import com.one.submission.dicoding.myfootballapp.view.activity.iview.DetailView
 import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.top_toolbar.*
+import org.jetbrains.anko.db.delete
+import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.design.snackbar
 
 /**
  * Dicoding Academy
  *
- * Submission 3
+ * Submission 4
  * Kotlin Android Developer Expert (KADE)
  *
- * Created by kheys on 05/02/19.
+ * Created by kheys on 06/02/19.
  */
 class DetailActivity : BaseActivity(), DetailView {
-
-
 
     private lateinit var mPresenter: DetailPresenter
     private var menuItemFav: Menu? = null
@@ -41,7 +46,7 @@ class DetailActivity : BaseActivity(), DetailView {
         setContentView(R.layout.activity_detail)
 
         // Initialize Presenter
-        mPresenter = DetailPresenter(this,applicationContext)
+        mPresenter = DetailPresenter(this, RepositoryApi(), applicationContext)
 
         // Load View
         setupToolbar()
@@ -61,9 +66,11 @@ class DetailActivity : BaseActivity(), DetailView {
         // Get Ientent
         event = intent.getParcelableExtra(EXTRA_EVENT)
 
+        EspressoIdlingResource.increment()
         // Home
         mPresenter.doLoadImageTeam(event.idHomeTeam.toString(), DetailPresenter.TypeTeam.HOME)
 
+        EspressoIdlingResource.increment()
         // Away
         mPresenter.doLoadImageTeam(event.idAwayTeam.toString(), DetailPresenter.TypeTeam.AWAY)
 
@@ -102,20 +109,6 @@ class DetailActivity : BaseActivity(), DetailView {
         scrollView.show()
     }
 
-    /* Load Image */
-    override fun loadImage(type: DetailPresenter.TypeTeam, teams: List<Team>) {
-        if (type == DetailPresenter.TypeTeam.HOME)
-
-            iv_team_home?.let {
-                Utils.loadImage(applicationContext, iv_team_home, teams[0].strTeamBadge)
-            }
-
-        if (type == DetailPresenter.TypeTeam.AWAY)
-            iv_team_away?.let {
-                Utils.loadImage(applicationContext, iv_team_away, teams[0].strTeamBadge)
-            }
-    }
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.option_menu_favorite, menu)
         menuItemFav = menu
@@ -135,19 +128,68 @@ class DetailActivity : BaseActivity(), DetailView {
                 super.onBackPressed()
             }
             R.id.action_menu_favorite -> {
-                mPresenter.doFavorite(isFavorite,event)
+                mPresenter.doFavorite(isFavorite)
             }
         }
         return false
     }
 
-    private fun setFavorite(){
+    private fun setFavorite() {
         selectedIconFav(isFavorite)
     }
 
-    override fun showMessage(message: String) {
-        ll_wrapper.snackbar(message)
+    override fun showMessage(isSelected: Boolean) {
+        EspressoIdlingResource.increment()
+        ll_wrapper.snackbar(if (isSelected) getString(R.string.add_favorite_message) else getString(R.string.remove_favorite_message))
+            .addCallback(object : Snackbar.Callback() {
+                override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
+                    super.onDismissed(transientBottomBar, event)
+                    EspressoIdlingResource.decrement()
+                }
+            })
     }
 
+    override fun insertDataFromDb() {
+        this.database.use {
+            insert(QueryHelper.FavoriteMatch.TABLE_NAME_STATIC, *Event.pairToValueFieldDb(event))
+        }
+    }
+
+    override fun removeDataFromDB() {
+        this.database.use {
+            delete(
+                QueryHelper.FavoriteMatch.TABLE_NAME_STATIC,
+                Event.ID_EVENT + " = {id}",
+                "id" to event.idEvent.toString()
+            )
+        }
+    }
+
+    override fun onDataLoaded(data: ResponseTeamFootball?) {
+        EspressoIdlingResource.decrement()
+        val teams = data?.teams
+        val type = data?.type
+
+        if (type == DetailPresenter.TypeTeam.HOME)
+
+            iv_team_home?.let {
+                teams?.get(0)?.strTeamBadge?.let { it1 -> Utils.loadImage(applicationContext, iv_team_home, it1) }
+            }
+
+        if (type == DetailPresenter.TypeTeam.AWAY)
+            iv_team_away?.let {
+                teams?.get(0)?.strTeamBadge?.let { it1 -> Utils.loadImage(applicationContext, iv_team_away, it1) }
+            }
+    }
+
+    override fun onDataError() {
+        ll_wrapper.snackbar(getString(R.string.data_error_message))
+            .addCallback(object : Snackbar.Callback() {
+                override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
+                    super.onDismissed(transientBottomBar, event)
+                    EspressoIdlingResource.decrement()
+                }
+            })
+    }
 
 }

@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.row_item_match.view.*
 /**
  * Dicoding Academy
  *
- * Submission 3
+ * Submission 4
  * Kotlin Android Developer Expert (KADE)
  *
  * Created by kheys on 05/02/19.
@@ -100,7 +100,6 @@ class MatchAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             itemView.tvHomeScore.text = item.intHomeScore
             itemView.tvAway.text = item.strAwayTeam
             itemView.tvAwayScore.text = item.intAwayScore
-
 
             setOnClickListener {
                 mDataset[adapterPosition]?.let { data ->

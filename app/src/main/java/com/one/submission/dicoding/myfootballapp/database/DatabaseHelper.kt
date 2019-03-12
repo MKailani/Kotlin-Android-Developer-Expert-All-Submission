@@ -7,13 +7,13 @@ import org.jetbrains.anko.db.ManagedSQLiteOpenHelper
 /**
  * Dicoding Academy
  *
- * Submission 3
+ * Submission 4
  * Kotlin Android Developer Expert (KADE)
  *
- * Created by kheys on 05/02/19.
+ * Created by kheys on 06/02/19.
  */
 class DatabaseHelper(context: Context) : ManagedSQLiteOpenHelper(context, "SportFavorite.db", null, 1) {
-    private var queryHelper:QueryHelper = QueryHelper()
+    private var queryHelper: QueryHelper = QueryHelper()
 
     override fun onCreate(db: SQLiteDatabase?) {
         queryHelper.favoriteMatch.createDb(db)
@@ -22,6 +22,7 @@ class DatabaseHelper(context: Context) : ManagedSQLiteOpenHelper(context, "Sport
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         queryHelper.favoriteMatch.dropTable(db)
     }
+
     companion object {
         private var instance: DatabaseHelper? = null
 
@@ -34,7 +35,6 @@ class DatabaseHelper(context: Context) : ManagedSQLiteOpenHelper(context, "Sport
             return instance as DatabaseHelper
         }
     }
-
 }
 
 val Context.database: DatabaseHelper

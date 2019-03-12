@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyFootballDbApp</string>
+    <string name="app_name">MyFootballTDDApp</string>
 
     <!-- Fragment Title -->
     <string name="last_match_fragment_title">Last Match</string>
@@ -25,5 +25,6 @@
     <string name="remove_favorite_message">Remove to Favorite</string>
     <string name="add_favorite_message">Added to Favorite</string>
     <string name="no_data_message">Tidak ada data</string>
+    <string name="data_error_message">There is an error, retry again</string>
 
 </resources>

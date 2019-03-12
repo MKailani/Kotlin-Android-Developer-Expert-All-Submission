@@ -6,25 +6,26 @@ import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import com.one.submission.dicoding.myfootballapp.R
+import com.one.submission.dicoding.myfootballapp.utils.espresso.EspressoIdlingResource
 import com.one.submission.dicoding.myfootballapp.view.fragment.LastMatchFragment
 
 /**
  * Dicoding Academy
  *
- * Submission 3
+ * Submission 4
  * Kotlin Android Developer Expert (KADE)
  *
- * Created by kheys on 05/02/19.
+ * Created by kheys on 06/02/19.
  */
-abstract class BaseActivity : AppCompatActivity(){
+abstract class BaseActivity : AppCompatActivity() {
 
     private fun popBackStack() {
-        val backstackCount = supportFragmentManager.backStackEntryCount
-        if (backstackCount - 2 >= 0) {
-            var backstackName: String? = supportFragmentManager.getBackStackEntryAt(backstackCount - 2).name
-            backstackName = backstackName ?: ""
+        val backStackCount = supportFragmentManager.backStackEntryCount
+        if (backStackCount - 2 >= 0) {
+            var backStackName: String? = supportFragmentManager.getBackStackEntryAt(backStackCount - 2).name
+            backStackName = backStackName ?: ""
 
-            if (TextUtils.isEmpty(backstackName)) {
+            if (TextUtils.isEmpty(backStackName)) {
                 goToHomeScreen()
             } else {
                 supportFragmentManager.popBackStackImmediate()
@@ -41,13 +42,14 @@ abstract class BaseActivity : AppCompatActivity(){
     }
 
     override fun onBackPressed() {
-        if(this is DetailActivity)
+        EspressoIdlingResource.increment()
+        if (this is DetailActivity)
             super.onBackPressed()
         else
             popBackStack()
     }
 
-    fun replaceFragment(fragment: Fragment, tagFragment:String?) {
+    fun replaceFragment(fragment: Fragment, tagFragment: String?) {
 
         // Clear Backstack if user click Now Playing
         if (fragment is LastMatchFragment) {
@@ -56,16 +58,16 @@ abstract class BaseActivity : AppCompatActivity(){
             }
 
         }
-        if(!TextUtils.isEmpty(tagFragment))
+        if (!TextUtils.isEmpty(tagFragment))
             supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.fl_screen,fragment)
+                .replace(R.id.fl_screen, fragment)
                 .addToBackStack(tagFragment)
                 .commit()
         else
             supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.fl_screen,fragment)
+                .replace(R.id.fl_screen, fragment)
                 .addToBackStack(null)
                 .commit()
     }
@@ -74,6 +76,11 @@ abstract class BaseActivity : AppCompatActivity(){
         supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
     }
 
-    fun getCurrentFragment() : Fragment? = supportFragmentManager.findFragmentById(R.id.fl_screen)
+    fun getCurrentFragment(): Fragment? = supportFragmentManager.findFragmentById(R.id.fl_screen)
 
+    override fun onResume() {
+        // Idling Resource Espresso Decrement
+        EspressoIdlingResource.decrement()
+        super.onResume()
+    }
 }

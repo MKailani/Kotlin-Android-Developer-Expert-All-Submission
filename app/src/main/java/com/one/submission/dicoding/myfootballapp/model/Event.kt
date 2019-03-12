@@ -7,10 +7,10 @@ import kotlinx.android.parcel.Parcelize
 /**
  * Dicoding Academy
  *
- * Submission 3
+ * Submission 4
  * Kotlin Android Developer Expert (KADE)
  *
- * Created by kheys on 05/02/19.
+ * Created by kheys on 06/02/19.
  */
 @Parcelize
 data class Event(

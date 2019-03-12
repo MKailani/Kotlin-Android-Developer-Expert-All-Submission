@@ -1,22 +1,23 @@
 package com.one.submission.dicoding.myfootballapp.view.activity.iview
 
-import com.one.submission.dicoding.myfootballapp.model.Team
-import com.one.submission.dicoding.myfootballapp.presenter.activity.DetailPresenter
+import com.one.submission.dicoding.myfootballapp.network.RepositoryCallbackApi
+import com.one.submission.dicoding.myfootballapp.network.response.ResponseTeamFootball
 
 /**
  * Dicoding Academy
  *
- * Submission 3
+ * Submission 4
  * Kotlin Android Developer Expert (KADE)
  *
- * Created by kheys on 05/02/19.
+ * Created by kheys on 06/02/19.
  */
-interface DetailView {
+interface DetailView : RepositoryCallbackApi<ResponseTeamFootball?> {
     fun setupToolbar()
     fun loadView()
-    fun loadImage(type: DetailPresenter.TypeTeam, teams:List<Team>)
     fun showLoading()
-    fun showMessage(message:String)
+    fun showMessage(isSelected: Boolean)
     fun dismissLoading()
-    fun selectedIconFav(isSelected:Boolean)
+    fun selectedIconFav(isSelected: Boolean)
+    fun insertDataFromDb()
+    fun removeDataFromDB()
 }

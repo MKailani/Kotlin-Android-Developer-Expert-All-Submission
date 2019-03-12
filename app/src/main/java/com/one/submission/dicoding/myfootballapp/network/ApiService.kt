@@ -9,18 +9,18 @@ import retrofit2.http.Query
 /**
  * Dicoding Academy
  *
- * Submission 3
+ * Submission 4
  * Kotlin Android Developer Expert (KADE)
  *
- * Created by kheys on 05/02/19.
+ * Created by kheys on 06/02/19.
  */
 interface ApiService {
     @GET("eventsnextleague.php")
-    fun getNextMatch(@Query("id") id:String) : Call<ResponseMatchFootball>
+    fun getNextMatch(@Query("id") id: String): Call<ResponseMatchFootball>
 
     @GET("eventspastleague.php")
-    fun getLastMatch(@Query("id") id:String) : Call<ResponseMatchFootball>
+    fun getLastMatch(@Query("id") id: String): Call<ResponseMatchFootball>
 
     @GET("lookupteam.php")
-    fun getTeamLeague(@Query("id") id:String) : Call<ResponseTeamFootball>
+    fun getTeamLeague(@Query("id") id: String): Call<ResponseTeamFootball>
 }

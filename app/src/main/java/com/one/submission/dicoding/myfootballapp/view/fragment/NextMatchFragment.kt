@@ -8,7 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.one.submission.dicoding.myfootballapp.R
 import com.one.submission.dicoding.myfootballapp.model.Event
+import com.one.submission.dicoding.myfootballapp.network.RepositoryApi
+import com.one.submission.dicoding.myfootballapp.network.response.ResponseMatchFootball
 import com.one.submission.dicoding.myfootballapp.presenter.fragment.NextMatchPresenter
+import com.one.submission.dicoding.myfootballapp.utils.espresso.EspressoIdlingResource
 import com.one.submission.dicoding.myfootballapp.utils.extension.hide
 import com.one.submission.dicoding.myfootballapp.utils.extension.show
 import com.one.submission.dicoding.myfootballapp.view.activity.MainActivity
@@ -19,20 +22,16 @@ import kotlinx.android.synthetic.main.fragment_recycler_item.*
 /**
  * Dicoding Academy
  *
- * Submission 3
+ * Submission 4
  * Kotlin Android Developer Expert (KADE)
  *
- * Created by kheys on 05/02/19.
+ * Created by kheys on 06/02/19.
  */
 class NextMatchFragment : BaseFragment(), CommonView {
-    override fun goToNextActivity(event: Event) {
-
-        (activity as MainActivity).goToNextActivity(event)
-    }
 
     private lateinit var presenter: NextMatchPresenter
     private lateinit var layoutManager: LinearLayoutManager
-    private lateinit var  adapter : MatchAdapter
+    private lateinit var adapter: MatchAdapter
     private var isLoading = false
     private var page = 1
     private var counter = 1
@@ -41,7 +40,7 @@ class NextMatchFragment : BaseFragment(), CommonView {
     private var lastItemCounter = 0
 
     companion object {
-        val TAG:String = NextMatchFragment::class.java.simpleName
+        val TAG: String = NextMatchFragment::class.java.simpleName
 
         fun newInstance(): NextMatchFragment {
             return NextMatchFragment()
@@ -55,15 +54,13 @@ class NextMatchFragment : BaseFragment(), CommonView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        presenter = NextMatchPresenter(this)
+        presenter = NextMatchPresenter(this, RepositoryApi())
 
         // Load Data
         setupRecycler()
         setupListener()
         loadData()
     }
-
 
     override fun setupRecycler() {
         adapter = MatchAdapter(presenter)
@@ -87,29 +84,39 @@ class NextMatchFragment : BaseFragment(), CommonView {
                 val visibleThreshold = 1
                 if (lastItemCounter > 19 && !isLoading && totalItemCount <= lastVisibleItem + visibleThreshold) {
                     page = counter
-                    presenter.doNextMatch()
+                    presenter.doNextMatch("4328")
                 }
             }
         })
     }
 
-    override fun loadData() {
-        presenter.doNextMatch()
+    override fun onDataLoaded(data: ResponseMatchFootball?) {
+        EspressoIdlingResource.decrement()
+        dismissLoading()
+        data?.events?.let { adapter.addList(it) }
     }
 
-
-    override fun showData(listData: MutableList<Event>) {
-        dismissLoading()
-        adapter.addList(listData)
+    override fun loadData() {
+        EspressoIdlingResource.increment()
+        presenter.doNextMatch("4328")
     }
 
     override fun showLoading() {
         pbLoading?.show()
     }
 
+    override fun onDataError() {
+        EspressoIdlingResource.decrement()
+        (activity as MainActivity).handlingMessageError()
+
+    }
 
     override fun dismissLoading() {
         pbLoading?.hide()
 
+    }
+
+    override fun goToNextActivity(event: Event) {
+        (activity as MainActivity).goToNextActivity(event)
     }
 }

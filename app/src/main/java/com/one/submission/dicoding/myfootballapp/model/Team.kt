@@ -5,12 +5,12 @@ import com.google.gson.annotations.SerializedName
 /**
  * Dicoding Academy
  *
- * Submission 3
+ * Submission 4
  * Kotlin Android Developer Expert (KADE)
  *
- * Created by kheys on 05/02/19.
+ * Created by kheys on 06/02/19.
  */
-data class Team (
+data class Team(
     @SerializedName("idLeague")
     var idLeague: String,
     @SerializedName("idSoccerXML")

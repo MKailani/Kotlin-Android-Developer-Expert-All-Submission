@@ -63,6 +63,25 @@ dependencies {
     // Image Loader
     implementation "com.github.bumptech.glide:glide:$glide_version"
 
+
+    // mockito
+    testImplementation "org.mockito:mockito-core:$mockito_version"
+    testImplementation "org.mockito:mockito-inline:$mockito_version"
+    testImplementation "com.nhaarman:mockito-kotlin:$nhaarman_version"
+
+    // espresso
+    androidTestImplementation("com.android.support.test.espresso:espresso-contrib:$expresso_version") {
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'design'
+        exclude group: 'com.android.support', module: 'recyclerview-v7'
+    }
+
+    testImplementation "junit:junit:$junit_version"
+    androidTestImplementation "com.android.support.test:runner:$support_test_version"
+    androidTestImplementation "com.android.support.test:rules:$support_test_version"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$expresso_core_version"
+    implementation "com.android.support.test.espresso:espresso-idling-resource:$expresso_core_version"
+
 }
 
 
