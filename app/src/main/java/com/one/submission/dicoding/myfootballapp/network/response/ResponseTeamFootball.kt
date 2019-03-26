@@ -2,18 +2,18 @@ package com.one.submission.dicoding.myfootballapp.network.response
 
 import com.google.gson.annotations.SerializedName
 import com.one.submission.dicoding.myfootballapp.model.Team
-import com.one.submission.dicoding.myfootballapp.presenter.activity.DetailPresenter
+import com.one.submission.dicoding.myfootballapp.presenter.activity.MatchDetailPresenter
 
 /**
  * Dicoding Academy
  *
- * Submission 4
+ * Final Project
  * Kotlin Android Developer Expert (KADE)
  *
- * Created by kheys on 05/02/19.
+ * Created by kheys on 10/02/19.
  */
 data class ResponseTeamFootball(
     @SerializedName("teams")
     var teams: List<Team>,
-    var type: DetailPresenter.TypeTeam // Validate HOME / AWAY
+    var type: MatchDetailPresenter.TypeTeam  = MatchDetailPresenter.TypeTeam.AWAY// Validate HOME / AWAY
 )

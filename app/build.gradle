@@ -33,13 +33,9 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "com.android.support:appcompat-v7:$support_library"
+    implementation "com.android.support.constraint:constraint-layout:$constraint_version"
     implementation "com.android.support:support-v4:$support_library"
     implementation "com.android.support:design:$support_library"
-    implementation "com.android.support.constraint:constraint-layout:$contrainstlayout_version"
-    testImplementation "junit:junit:$junit_version"
-    androidTestImplementation "com.android.support.test:runner:$jrunner_version"
-    androidTestImplementation "com.android.support.test.espresso:espresso-core:$espresso_version"
 
     // Anko Commons
     implementation "org.jetbrains.anko:anko-commons:$anko_version"

@@ -25,7 +25,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.one.submission.dicoding.myfootballapp.view.activity.DetailActivity"/>
+        <activity android:name="com.one.submission.dicoding.myfootballapp.view.activity.MatchDetailActivity"/>
+
+        <activity android:name="com.one.submission.dicoding.myfootballapp.view.activity.MatchSearchActivity"
+                  android:launchMode="singleTop"/>
+
+        <activity android:name="com.one.submission.dicoding.myfootballapp.view.activity.PlayersDetailActivity"/>
+        <activity android:name="com.one.submission.dicoding.myfootballapp.view.activity.TeamsDetailActivity"/>
     </application>
 
 </manifest>

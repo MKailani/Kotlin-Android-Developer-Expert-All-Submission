@@ -1,9 +1,14 @@
-<resources>
-    <string name="app_name">MyFootballTDDApp</string>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">MyFootballApp</string>
 
-    <!-- Fragment Title -->
-    <string name="last_match_fragment_title">Last Match</string>
-    <string name="next_match_fragment_title">Next Match</string>
+    <!-- Fragment Pager Title -->
+    <string name="last_match_fragment_pager_title">Last Match</string>
+    <string name="next_match_fragment_pager_title">Next Match</string>
+    <string name="overview_fragment_pager_title">Overview</string>
+    <string name="player_fragment_pager_title">Player</string>
+
+    <string name="match_fragment_pager_title">Match</string>
+    <string name="team_fragment_pager_title">Teams</string>
 
     <!-- Define Detail View Title-->
     <string name="goals_title">Goals</string>
@@ -14,17 +19,22 @@
     <string name="forward_title">forward</string>
     <string name="subtitutes_title">Subtitutes</string>
     <string name="versus">VS</string>
-    <string name="main_title_toolbar">Football Match Schedule</string>
+    <string name="main_title_toolbar">Football App</string>
     <string name="detail_title_toolbar">Match Detail</string>
+    <string name="player_title_toolbar">Player Detail</string>
 
 
     <!-- Menu ToolBar-->
+    <string name="title_bar_search">Search</string>
     <string name="title_bar_favorite">Favorite</string>
-    <string name="title_bar_last_match">@string/last_match_fragment_title</string>
-    <string name="title_bar_next_match">@string/next_match_fragment_title</string>
+    <string name="title_bar_last_match" tools:keep="@string/title_bar_last_match">@string/last_match_fragment_pager_title</string>
+
+    <!-- Message -->
     <string name="remove_favorite_message">Remove to Favorite</string>
     <string name="add_favorite_message">Added to Favorite</string>
     <string name="no_data_message">Tidak ada data</string>
     <string name="data_error_message">There is an error, retry again</string>
+    <string name="title_weight">Weight</string>
+    <string name="title_height">Height</string>
 
 </resources>

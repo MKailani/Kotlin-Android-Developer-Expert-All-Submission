@@ -7,53 +7,53 @@ import com.one.submission.dicoding.myfootballapp.model.Event
 import com.one.submission.dicoding.myfootballapp.network.RepositoryApi
 import com.one.submission.dicoding.myfootballapp.network.RepositoryCallbackApi
 import com.one.submission.dicoding.myfootballapp.network.response.ResponseTeamFootball
-import com.one.submission.dicoding.myfootballapp.view.activity.iview.DetailView
+import com.one.submission.dicoding.myfootballapp.view.activity.iview.MatchDetailView
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.select
 
 /**
  * Dicoding Academy
  *
- * Submission 4
+ * Final Project
  * Kotlin Android Developer Expert (KADE)
  *
- * Created by kheys on 05/02/19.
+ * Created by kheys on 10/02/19.
  */
-class DetailPresenter(
-    private var mView: DetailView,
+class MatchDetailPresenter(
+    private var mViewMatch: MatchDetailView,
     private val repositoryApi: RepositoryApi,
     private var context: Context
 ) {
 
     // Load Data Image Team
     fun doLoadImageTeam(id: String, type: TypeTeam) {
-        mView.showLoading()
+        mViewMatch.showLoading()
         repositoryApi.getLoadImageTeam(id, object : RepositoryCallbackApi<ResponseTeamFootball?> {
             override fun onDataLoaded(data: ResponseTeamFootball?) {
                 data?.type = type
-                mView.onDataLoaded(data)
+                mViewMatch.onDataLoaded(data)
             }
 
             override fun onDataError() {
-                mView.onDataError()
+                mViewMatch.onDataError()
             }
 
         })
 
-        mView.dismissLoading()
+        mViewMatch.dismissLoading()
 
     }
 
     fun doFavorite(isFavorite: Boolean) {
         if (isFavorite) {
-            mView.selectedIconFav(!isFavorite)
-            mView.removeDataFromDB()
-            mView.showMessage(!isFavorite)
+            mViewMatch.selectedIconFav(!isFavorite)
+            mViewMatch.removeDataFromDB()
+            mViewMatch.showMessage(!isFavorite)
 
         } else {
-            mView.selectedIconFav(!isFavorite)
-            mView.insertDataFromDb()
-            mView.showMessage(!isFavorite)
+            mViewMatch.selectedIconFav(!isFavorite)
+            mViewMatch.insertDataFromDb()
+            mViewMatch.showMessage(!isFavorite)
         }
 
     }

@@ -10,12 +10,12 @@ import com.one.submission.dicoding.myfootballapp.database.database
 import com.one.submission.dicoding.myfootballapp.model.Event
 import com.one.submission.dicoding.myfootballapp.network.RepositoryApi
 import com.one.submission.dicoding.myfootballapp.network.response.ResponseTeamFootball
-import com.one.submission.dicoding.myfootballapp.presenter.activity.DetailPresenter
+import com.one.submission.dicoding.myfootballapp.presenter.activity.MatchDetailPresenter
 import com.one.submission.dicoding.myfootballapp.utils.Utils
 import com.one.submission.dicoding.myfootballapp.utils.espresso.EspressoIdlingResource
 import com.one.submission.dicoding.myfootballapp.utils.extension.hide
 import com.one.submission.dicoding.myfootballapp.utils.extension.show
-import com.one.submission.dicoding.myfootballapp.view.activity.iview.DetailView
+import com.one.submission.dicoding.myfootballapp.view.activity.iview.MatchDetailView
 import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.top_toolbar.*
 import org.jetbrains.anko.db.delete
@@ -25,14 +25,14 @@ import org.jetbrains.anko.design.snackbar
 /**
  * Dicoding Academy
  *
- * Submission 4
+ * Final Project
  * Kotlin Android Developer Expert (KADE)
  *
- * Created by kheys on 06/02/19.
+ * Created by kheys on 10/02/19.
  */
-class DetailActivity : BaseActivity(), DetailView {
+class MatchDetailActivity : BaseActivity(), MatchDetailView {
 
-    private lateinit var mPresenter: DetailPresenter
+    private lateinit var mDetailPresenter: MatchDetailPresenter
     private var menuItemFav: Menu? = null
     private var isFavorite = false
     private lateinit var event: Event
@@ -46,7 +46,7 @@ class DetailActivity : BaseActivity(), DetailView {
         setContentView(R.layout.activity_detail)
 
         // Initialize Presenter
-        mPresenter = DetailPresenter(this, RepositoryApi(), applicationContext)
+        mDetailPresenter = MatchDetailPresenter(this, RepositoryApi(), applicationContext)
 
         // Load View
         setupToolbar()
@@ -68,14 +68,14 @@ class DetailActivity : BaseActivity(), DetailView {
 
         EspressoIdlingResource.increment()
         // Home
-        mPresenter.doLoadImageTeam(event.idHomeTeam.toString(), DetailPresenter.TypeTeam.HOME)
+        mDetailPresenter.doLoadImageTeam(event.idHomeTeam.toString(), MatchDetailPresenter.TypeTeam.HOME)
 
         EspressoIdlingResource.increment()
         // Away
-        mPresenter.doLoadImageTeam(event.idAwayTeam.toString(), DetailPresenter.TypeTeam.AWAY)
+        mDetailPresenter.doLoadImageTeam(event.idAwayTeam.toString(), MatchDetailPresenter.TypeTeam.AWAY)
 
         //Load Favorite
-        isFavorite = mPresenter.isFavorite(event.idEvent)
+        isFavorite = mDetailPresenter.isFavorite(event.idEvent)
 
         // Extension
         tv_team_home.text = event.strHomeTeam ?: ""
@@ -128,7 +128,7 @@ class DetailActivity : BaseActivity(), DetailView {
                 super.onBackPressed()
             }
             R.id.action_menu_favorite -> {
-                mPresenter.doFavorite(isFavorite)
+                mDetailPresenter.doFavorite(isFavorite)
             }
         }
         return false
@@ -170,13 +170,13 @@ class DetailActivity : BaseActivity(), DetailView {
         val teams = data?.teams
         val type = data?.type
 
-        if (type == DetailPresenter.TypeTeam.HOME)
+        if (type == MatchDetailPresenter.TypeTeam.HOME)
 
             iv_team_home?.let {
                 teams?.get(0)?.strTeamBadge?.let { it1 -> Utils.loadImage(applicationContext, iv_team_home, it1) }
             }
 
-        if (type == DetailPresenter.TypeTeam.AWAY)
+        if (type == MatchDetailPresenter.TypeTeam.AWAY)
             iv_team_away?.let {
                 teams?.get(0)?.strTeamBadge?.let { it1 -> Utils.loadImage(applicationContext, iv_team_away, it1) }
             }

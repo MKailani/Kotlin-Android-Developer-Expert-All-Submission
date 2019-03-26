@@ -7,10 +7,10 @@ import com.one.submission.dicoding.myfootballapp.utils.espresso.EspressoIdlingRe
 /**
  * Dicoding Academy
  *
- * Submission 4
+ * Final Project
  * Kotlin Android Developer Expert (KADE)
  *
- * Created by kheys on 06/02/19.
+ * Created by kheys on 10/02/19.
  */
 abstract class BaseFragment : Fragment() {
     override fun onResume() {

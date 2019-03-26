@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <include
+            layout="@layout/top_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <ImageView
+                    android:id="@+id/ivPlayer"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/banner_width"
+                    android:contentDescription="@null"
+                    android:scaleType="centerCrop"
+                    tools:src="@color/color_grey"/>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
+
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/title_weight"
+                        android:textAlignment="center"/>
+
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/title_height"
+                        android:textAlignment="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <TextView
+                        android:id="@+id/tvWeight"
+                        style="@style/TextAppearance.AppCompat.Display2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/text_dimens_30sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorPrimary"
+                        tools:text="100"/>
+
+                <TextView
+                        android:id="@+id/tvHeight"
+                        style="@style/TextAppearance.AppCompat.Display2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/text_dimens_30sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorPrimary"
+                        tools:text="20"/>
+            </LinearLayout>
+
+            <TextView
+                    android:id="@+id/tvPosition"
+                    style="@style/TextAppearance.AppCompat.Medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimary"
+                    tools:text="Forward"/>
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@android:color/darker_gray"/>
+
+            <TextView
+                    android:id="@+id/tvDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    tools:text="@tools:sample/lorem/random"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

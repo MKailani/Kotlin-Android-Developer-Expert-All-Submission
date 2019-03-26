@@ -19,6 +19,7 @@
             android:layout_height="wrap_content"
             app:titleTextColor="@android:color/white"
             tools:title="Title Toolbar"
+            app:theme="@style/ToolbarTheme"
             android:background="?attr/colorPrimary" />
 
     </android.support.design.widget.AppBarLayout>

@@ -6,9 +6,13 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import com.one.submission.dicoding.myfootballapp.R
 import com.one.submission.dicoding.myfootballapp.model.Event
+import com.one.submission.dicoding.myfootballapp.model.League
 import com.one.submission.dicoding.myfootballapp.network.RepositoryApi
+import com.one.submission.dicoding.myfootballapp.network.response.ResponseLeagueFootball
 import com.one.submission.dicoding.myfootballapp.network.response.ResponseMatchFootball
 import com.one.submission.dicoding.myfootballapp.presenter.fragment.NextMatchPresenter
 import com.one.submission.dicoding.myfootballapp.utils.espresso.EspressoIdlingResource
@@ -18,14 +22,15 @@ import com.one.submission.dicoding.myfootballapp.view.activity.MainActivity
 import com.one.submission.dicoding.myfootballapp.view.adapter.recycler.MatchAdapter
 import com.one.submission.dicoding.myfootballapp.view.fragment.iview.CommonView
 import kotlinx.android.synthetic.main.fragment_recycler_item.*
+import kotlinx.android.synthetic.main.fragment_recycler_item_with_spinner.*
 
 /**
  * Dicoding Academy
  *
- * Submission 4
+ * Final Project
  * Kotlin Android Developer Expert (KADE)
  *
- * Created by kheys on 06/02/19.
+ * Created by kheys on 10/02/19.
  */
 class NextMatchFragment : BaseFragment(), CommonView {
 
@@ -39,8 +44,9 @@ class NextMatchFragment : BaseFragment(), CommonView {
     private var lastVisibleItem: Int = 0
     private var lastItemCounter = 0
 
+    private lateinit var league: League
+
     companion object {
-        val TAG: String = NextMatchFragment::class.java.simpleName
 
         fun newInstance(): NextMatchFragment {
             return NextMatchFragment()
@@ -48,7 +54,7 @@ class NextMatchFragment : BaseFragment(), CommonView {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_recycler_item, container, false)
+        return inflater.inflate(R.layout.fragment_recycler_item_with_spinner, container, false)
 
     }
 
@@ -93,11 +99,16 @@ class NextMatchFragment : BaseFragment(), CommonView {
     override fun onDataLoaded(data: ResponseMatchFootball?) {
         EspressoIdlingResource.decrement()
         dismissLoading()
-        data?.events?.let { adapter.addList(it) }
+        data?.events?.let {
+            if(adapter.itemCount > 0)
+                adapter.clearList()
+            adapter.addList(it)
+        }
     }
 
     override fun loadData() {
         EspressoIdlingResource.increment()
+        presenter.getAllLeague()
         presenter.doNextMatch("4328")
     }
 
@@ -118,5 +129,23 @@ class NextMatchFragment : BaseFragment(), CommonView {
 
     override fun goToNextActivity(event: Event) {
         (activity as MainActivity).goToNextActivity(event)
+    }
+
+    override fun loadSpinner(data: ResponseLeagueFootball?) {
+        this.isVisible.let {
+            if (data != null) {
+
+                spTeam?.adapter = ArrayAdapter(context!!, android.R.layout.simple_spinner_item, data.leagues.toList())
+
+                spTeam?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                    override fun onNothingSelected(parent: AdapterView<*>?) {}
+
+                    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                        league = spTeam?.selectedItem as League
+                        presenter.doNextMatch(league.idLeague.toString())
+                    }
+                }
+            }
+        }
     }
 }

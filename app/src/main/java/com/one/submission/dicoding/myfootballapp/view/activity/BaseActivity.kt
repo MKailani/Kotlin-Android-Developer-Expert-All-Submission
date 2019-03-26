@@ -7,15 +7,15 @@ import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import com.one.submission.dicoding.myfootballapp.R
 import com.one.submission.dicoding.myfootballapp.utils.espresso.EspressoIdlingResource
-import com.one.submission.dicoding.myfootballapp.view.fragment.LastMatchFragment
+import com.one.submission.dicoding.myfootballapp.view.fragment.MatchFragment
 
 /**
  * Dicoding Academy
  *
- * Submission 4
+ * Final Project
  * Kotlin Android Developer Expert (KADE)
  *
- * Created by kheys on 06/02/19.
+ * Created by kheys on 10/02/19.
  */
 abstract class BaseActivity : AppCompatActivity() {
 
@@ -43,16 +43,19 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         EspressoIdlingResource.increment()
-        if (this is DetailActivity)
-            super.onBackPressed()
-        else
-            popBackStack()
+        when {
+            this is MatchDetailActivity ||
+            this is MatchSearchActivity ||
+            this is PlayersDetailActivity ||
+            this is TeamsDetailActivity -> super.onBackPressed()
+            else -> popBackStack()
+        }
     }
 
     fun replaceFragment(fragment: Fragment, tagFragment: String?) {
 
         // Clear Backstack if user click Now Playing
-        if (fragment is LastMatchFragment) {
+        if (fragment is MatchFragment) {
             if (supportFragmentManager.backStackEntryCount - 2 >= 0) {
                 goToTopFragment()
             }

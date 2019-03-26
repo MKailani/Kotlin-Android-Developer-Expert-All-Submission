@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables"
+            android:padding="@dimen/margin_10dp">
+
+        <ImageView
+                android:id="@+id/ivTeam"
+                android:layout_width="@dimen/icon_team"
+                android:layout_height="@dimen/icon_team"
+                android:contentDescription="@null"
+                tools:src="@drawable/img_barca"/>
+
+        <TextView
+                android:id="@+id/tvTeamTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_dimens_14sp"
+                android:layout_marginStart="@dimen/margin_10dp"
+                tools:text="Title"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_grey"/>
+
+</LinearLayout>
