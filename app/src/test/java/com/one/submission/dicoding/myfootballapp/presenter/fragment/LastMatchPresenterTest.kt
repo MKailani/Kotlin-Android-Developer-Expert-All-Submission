@@ -17,10 +17,10 @@ import org.mockito.junit.MockitoJUnitRunner
 /**
  * Dicoding Academy
  *
- * Submission 4
+ * Final Project
  * Kotlin Android Developer Expert (KADE)
  *
- * Created by kheys on 06/02/19.
+ * Created by kheys on 10/02/19.
  */
 @RunWith(MockitoJUnitRunner::class)
 class LastMatchPresenterTest {

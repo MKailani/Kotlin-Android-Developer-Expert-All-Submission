@@ -6,19 +6,21 @@ import android.view.View
 import android.view.ViewGroup
 import com.one.submission.dicoding.myfootballapp.R
 import com.one.submission.dicoding.myfootballapp.model.Event
-import com.one.submission.dicoding.myfootballapp.presenter.fragment.FavoritePresenter
+import com.one.submission.dicoding.myfootballapp.presenter.activity.MatchSearchPresenter
+import com.one.submission.dicoding.myfootballapp.presenter.fragment.FavoriteMatchPresenter
 import com.one.submission.dicoding.myfootballapp.presenter.fragment.LastMatchPresenter
 import com.one.submission.dicoding.myfootballapp.presenter.fragment.NextMatchPresenter
+import com.one.submission.dicoding.myfootballapp.utils.Utils
 import com.one.submission.dicoding.myfootballapp.view.adapter.recycler.viewholder.ProgressViewHolder
 import kotlinx.android.synthetic.main.row_item_match.view.*
 
 /**
  * Dicoding Academy
  *
- * Submission 4
+ * Final Project
  * Kotlin Android Developer Expert (KADE)
  *
- * Created by kheys on 05/02/19.
+ * Created by kheys on 10/02/19.
  */
 class MatchAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -30,7 +32,8 @@ class MatchAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var lastMatchPresenter: LastMatchPresenter? = null
     var nextMatchPresenter: NextMatchPresenter? = null
-    var favoritePresenter: FavoritePresenter? = null
+    var favoritePresenter: FavoriteMatchPresenter? = null
+    var matchSearchPresenter: MatchSearchPresenter? = null
 
     var mDataset: MutableList<Event?> = ArrayList()
 
@@ -42,13 +45,22 @@ class MatchAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         this.nextMatchPresenter = nextMatchPresenter
     }
 
-    constructor(favoritePresenter: FavoritePresenter) : this() {
+    constructor(favoritePresenter: FavoriteMatchPresenter) : this() {
         this.favoritePresenter = favoritePresenter
+    }
+
+    constructor(matchSearchPresenter: MatchSearchPresenter) : this() {
+        this.matchSearchPresenter = matchSearchPresenter
     }
 
 
     fun addList(mDataset: MutableList<Event>) {
         this.mDataset.addAll(mDataset)
+        this.notifyDataSetChanged()
+    }
+
+    fun clearList(){
+        this.mDataset.clear()
         this.notifyDataSetChanged()
     }
 
@@ -95,7 +107,8 @@ class MatchAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     inner class MatchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(item: Event) = with(itemView) {
-            itemView.tvDate.text = item.dateEvent
+            itemView.tvDate.text = Utils.getDateFormat(item.dateEvent)
+            itemView.tvTime.text = Utils.getTimeFormat(item.strTime)
             itemView.tvHome.text = item.strHomeTeam
             itemView.tvHomeScore.text = item.intHomeScore
             itemView.tvAway.text = item.strAwayTeam
@@ -107,6 +120,7 @@ class MatchAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     lastMatchPresenter?.mView?.goToNextActivity(data)
                     nextMatchPresenter?.mView?.goToNextActivity(data)
                     favoritePresenter?.mView?.goToNextActivity(data)
+                    matchSearchPresenter?.mView?.goToNextActivity(data)
                 }
 
             }

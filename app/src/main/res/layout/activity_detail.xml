@@ -64,8 +64,8 @@
 
                     <ImageView
                             android:id="@+id/iv_team_home"
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
+                            android:layout_width="@dimen/icon_team"
+                            android:layout_height="@dimen/icon_team"
                             tools:src="@drawable/img_barca"
                             android:contentDescription="@null"/>
 

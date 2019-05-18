@@ -7,20 +7,22 @@ import org.jetbrains.anko.db.ManagedSQLiteOpenHelper
 /**
  * Dicoding Academy
  *
- * Submission 4
+ * Final Project
  * Kotlin Android Developer Expert (KADE)
  *
- * Created by kheys on 06/02/19.
+ * Created by kheys on 10/02/19.
  */
 class DatabaseHelper(context: Context) : ManagedSQLiteOpenHelper(context, "SportFavorite.db", null, 1) {
     private var queryHelper: QueryHelper = QueryHelper()
 
     override fun onCreate(db: SQLiteDatabase?) {
         queryHelper.favoriteMatch.createDb(db)
+        queryHelper.favoriteTeam.createDb(db)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         queryHelper.favoriteMatch.dropTable(db)
+        queryHelper.favoriteTeam.dropTable(db)
     }
 
     companion object {

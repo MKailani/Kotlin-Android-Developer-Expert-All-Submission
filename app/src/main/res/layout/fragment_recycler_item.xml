@@ -2,7 +2,14 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        xmlns:tools="http://schemas.android.com/tools">
+        android:id="@+id/rl_wrapper"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:paddingRight="@dimen/margin_15dp"
+        android:paddingEnd="@dimen/margin_15dp"
+        android:paddingStart="@dimen/margin_15dp"
+        android:paddingLeft="@dimen/margin_15dp"
+        android:paddingTop="@dimen/margin_15dp"
+        android:paddingBottom="@dimen/margin_15dp">
 
     <ProgressBar
             android:id="@+id/pbLoading"

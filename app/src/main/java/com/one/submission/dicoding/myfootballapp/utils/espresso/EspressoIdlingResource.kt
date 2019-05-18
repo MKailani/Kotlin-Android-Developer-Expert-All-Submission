@@ -7,10 +7,10 @@ import android.support.test.espresso.idling.CountingIdlingResource
 /**
  * Dicoding Academy
  *
- * Submission 4
+ * Final Project
  * Kotlin Android Developer Expert (KADE)
  *
- * Created by kheys on 06/02/19.
+ * Created by kheys on 10/02/19.
  */
 internal object EspressoIdlingResource {
     private const val RESOURCE = "GLOBAL"

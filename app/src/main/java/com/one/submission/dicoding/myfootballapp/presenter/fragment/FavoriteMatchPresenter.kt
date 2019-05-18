@@ -13,12 +13,14 @@ import org.jetbrains.anko.db.select
 /**
  * Dicoding Academy
  *
- * Submission 4
+ * Final Project
  * Kotlin Android Developer Expert (KADE)
  *
- * Created by kheys on 05/02/19.
+ * Created by kheys on 10/02/19.
  */
-class FavoritePresenter(val mView: CommonView, private val context: Context) {
+
+class FavoriteMatchPresenter(val mView: CommonView,val context: Context) {
+
 
     // Load Data Favorite Match
     fun doFavoriteMatch() {

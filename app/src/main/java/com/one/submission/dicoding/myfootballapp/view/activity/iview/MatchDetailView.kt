@@ -6,12 +6,12 @@ import com.one.submission.dicoding.myfootballapp.network.response.ResponseTeamFo
 /**
  * Dicoding Academy
  *
- * Submission 4
+ * Final Project
  * Kotlin Android Developer Expert (KADE)
  *
- * Created by kheys on 06/02/19.
+ * Created by kheys on 10/02/19.
  */
-interface DetailView : RepositoryCallbackApi<ResponseTeamFootball?> {
+interface MatchDetailView : RepositoryCallbackApi<ResponseTeamFootball?> {
     fun setupToolbar()
     fun loadView()
     fun showLoading()

@@ -5,13 +5,13 @@
     <item
         android:id="@+id/bottom_prev_match"
         android:icon="@drawable/ic_last_match"
-        android:title="@string/title_bar_last_match"
+        android:title="@string/match_fragment_pager_title"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/bottom_next_match"
-        android:icon="@drawable/ic_next_match"
-        android:title="@string/title_bar_next_match"
+        android:icon="@drawable/ic_team"
+        android:title="@string/team_fragment_pager_title"
         app:showAsAction="ifRoom" />
 
     <item

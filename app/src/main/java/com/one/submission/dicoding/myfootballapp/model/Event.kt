@@ -7,10 +7,10 @@ import kotlinx.android.parcel.Parcelize
 /**
  * Dicoding Academy
  *
- * Submission 4
+ * Final Project    
  * Kotlin Android Developer Expert (KADE)
  *
- * Created by kheys on 06/02/19.
+ * Created by kheys on 10/02/19.
  */
 @Parcelize
 data class Event(
@@ -20,6 +20,8 @@ data class Event(
     var idEvent: String?,
     @SerializedName("dateEvent")
     var dateEvent: String?,
+    @SerializedName("strTime")
+    val strTime: String?,
     @SerializedName("idHomeTeam")
     var idHomeTeam: String?,
     @SerializedName("strHomeTeam")
@@ -70,6 +72,7 @@ data class Event(
         const val ID = "ID"
         const val ID_EVENT = "ID_EVENT"
         const val DATE_EVENT = "DATE"
+        const val TIME_EVENT = "TIME"
         const val HOME_ID = "HOME_ID"
         const val HOME_TEAM = "HOME_TEAM"
         const val HOME_SCORE = "HOME_SCORE"
@@ -97,6 +100,7 @@ data class Event(
 
             ID_EVENT to event.idEvent,
             DATE_EVENT to event.dateEvent,
+            TIME_EVENT to event.strTime,
             HOME_ID to event.idHomeTeam,
             HOME_TEAM to event.strHomeTeam,
             HOME_SCORE to event.intHomeScore,
